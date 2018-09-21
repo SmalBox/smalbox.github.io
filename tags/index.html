@@ -120,9 +120,7 @@
     </nav>
 </header>
 
-    
-
-<div class="bg-cover" style="background-image: url('/medias/cover.jpg')">
+    <div class="bg-cover" style="background-image: url('/medias/cover.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
@@ -149,40 +147,48 @@
 $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
 </script>
 
-<main class="content">    
-    <div id="cd-timeline" class="container">
-        
-        <div class="cd-timeline-img year bg-color">
-            <span>2018</span>
+<main class="content">
+    <div id="tags" class="container">
+        <div class="tag-chips">
+            
         </div>
+        <div >
+
         
-        <div class="cd-timeline-img month bg-color">
-            <span>09</span>
-        </div>
-        
-        <div class="cd-timeline-block" data-aos="fade-up">
-            <div class="cd-timeline-img cd-picture">
+
+        <article>
+            <div class="row tags-posts">
                 
                 
-                <div class="img-item" data-src="/medias/featureimages/12.jpg">
-                    <img src="/medias/featureimages/12.jpg" class="responsive-img thumbnail-img" alt="Hello World"/>
+                <div class="article tag-post col s12 m6 l4" data-tags="">
+                    <div class="card">
+                        <a href="/2018/09/20/hello-world/">
+                            <div class="card-image tag-image">
+                                
+                                
+                                <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                                
+                                <span class="card-title">Hello World</span>
+                            </div>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="publish-info">
+                                <span class="publish-date">
+                                    <i class="fa fa-calendar fa-fw"></i>2018-09-20
+                                </span>
+                                <span class="publish-author">
+                                    <i class="fa fa-user fa-fw"></i>
+                                    
+                                        smalbox
+                                    
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
             </div>
-            <div class="cd-timeline-content">
-                <a href="/2018/09/20/hello-world/">
-                    <div class="article-title">Hello World</div>
-                </a>
-                <div class="tags">
-                    
-                    <span class="cd-date">2018-09-20</span>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        
+        </article>
     </div>
 </main>
 
