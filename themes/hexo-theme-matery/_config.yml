@@ -7,8 +7,7 @@ menu:
 # index page dream text,
 dream:
   enable: true
-  text: The best preparation for tomorrow is doing your best today.
-
+  text: 去尝试没人想过的，去探索没人触及的，去模仿、创造、超越。
 # show post-calendar
 postCalendar: true
 
