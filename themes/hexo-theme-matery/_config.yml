@@ -17,12 +17,12 @@ logo: /medias/logo.png
 
 # the gitment config，default disabled
 gitment:
-  enable: false
-  owner:
-  repo:
-  oauth:
-    clientId:
-    clientSecret:
+  enable: true
+  owner: smalbox
+  repo: smalbox.github.io
+  oauth: 
+    clientId: a0909d072a0882970281
+    clientSecret: e201a3feaa60ff9087217ad3bcefeeb358acc540
 
 # disqus config, default disabled
 disqus:
