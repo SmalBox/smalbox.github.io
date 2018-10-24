@@ -116,7 +116,7 @@ git clone https://github.com/imsun/gh-oauth-server.git
 ``` bash
 npm install && nohup npm start &
 ```
-*(注：如果运行失败，可能是nodejs没有安装好，请安装nodejs。再不行的话，请尝试打开项目目录中的package.json,修改里面的**node server** 为 **nodejs server** 然后再重新运行命令,如果成功会提示正在监听3000端口)*
+*(注：如果运行失败，可能是nodejs没有安装好，请安装nodejs。再不行的话，请尝试打开项目目录中的package.json,修改里面的**node server** 为 **nodejs server** 然后再重新运行命令,如果成功,在项目目录下的nohup.out文件中的最后，会提示正在监听3000端口)*
 
   3. 替换js文件中的作者服务器为自己服务器
 
