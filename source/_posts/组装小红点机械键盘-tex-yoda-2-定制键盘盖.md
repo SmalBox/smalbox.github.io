@@ -9,7 +9,7 @@ tags:
 ---
 # 组装小红点机械键盘 TexYoda2 & 定制键盘盖
 
-![TexYoda2Feature1](TexYoda2Feature1.jpg)
+![TexYoda2night](TexYoda2night.jpg)
 
 ## **前言**
 
