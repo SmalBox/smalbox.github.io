@@ -104,19 +104,19 @@ gitment.render('container')
 
 **原因：** 在母版中调用的js文件中，有访问gitment作者的服务器代码，而作者的服务器不好使了。
 
-**解决办法：** 自己搭建一个服务器（需要有一个vps来辅助搭建服务器）
+**解决办法：** 自己搭建一个服务器（需要有一个vps来辅助搭建服务器，当然下面我也会提供一个我搭建好的服务器）
 
   1. 在服务器中clone作者的服务器源码
 
 ``` bash
-git clone https://github.com/imsun/gh-oauth-server.git
+git clone https://github.com/SmalBox/gh-feed.git
 ```
   2. 进入项目，下载依赖，并启动
 
 ``` bash
 npm install && nohup npm start &
 ```
-*(注：如果运行失败，可能是nodejs没有安装好，请安装nodejs。再不行的话，请尝试打开项目目录中的package.json,修改里面的**node server** 为 **nodejs server** 然后再重新运行命令,如果成功,在项目目录下的nohup.out文件中的最后，会提示正在监听3000端口)*
+*(注：如果运行失败，可能是nodejs没有安装好，请安装nodejs。然后再重新运行命令,如果成功,在项目目录下的nohup.out文件中的最后，会提示正在监听3000端口。这里需要用nginx将证书搞定，用https访问，否则默认http还是会报错。证书的问题我就不啰嗦了，证书参考[这个帖子的 11.后续优化 部分](https://www.bugprogrammer.me/2018/05/19/phpnginxmysql.html#more),端口转发请参考[这个帖子](https://segmentfault.com/a/1190000002797606))*
 
   3. 替换js文件中的作者服务器为自己服务器
 
@@ -124,9 +124,12 @@ npm install && nohup npm start &
 ``` bash
 https://gh-oauth.imsun.net
 ```
-将其替换成刚才搭建服务器的地址，如果没有做好端口映射可直接地址加端口也可以。
+将其替换成刚才搭建服务器的地址即可。
 
-OK大功告成，可以去测试一下了。可以在本站的下面回复评论测试。
-当然我还碰到的一种情况就是github有时会垮掉。登录不上，这跟gitment没啥关系，是github的锅。
+  >这里有一个我搭好的 **https://bak.smalbox.club** ,将其填进去即可使用。
 
-如果有任何问题，可以在下面评论或者通过邮件联系我。
+  >如果发现这个服务器失效了可以在下面**留言**或者**邮件**联系我，我会更新服务器。
+
+**OK大功告成，可以去测试一下了。可以在本站的下面回复评论测试。**
+
+**如果有任何问题，可以在下面评论或者通过邮件联系我。**
