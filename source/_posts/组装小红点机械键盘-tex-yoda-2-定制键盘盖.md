@@ -2,6 +2,7 @@
 title: 组装小红点机械键盘 tex yoda 2 & 定制键盘盖
 date: 2018-10-21 12:50:03
 author: SmalBox
+categories: DIY
 tags:
   - 小红点
   - yex yoda 2

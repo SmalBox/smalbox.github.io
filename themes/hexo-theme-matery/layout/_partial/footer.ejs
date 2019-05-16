@@ -1,29 +1,34 @@
 <footer class="page-footer bg-color">
     <div class="container row center-align">
-        <div class="col s12 m12 l8 copy-right">
-            本站由&copy;<a href="https://smalbox.com" target="_blank">SmalBox</a>基于
-            <a href="https://hexo.io/" target="_blank">Hexo</a> 采用
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://smalbox.club" target="_blank">SmalBox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
             <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            <% if (theme.wordCount.enable && theme.wordCount.totalCount) { %>
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color"><%= totalcount(site) %></span>
+            <% } %>
+
+            <% let socialClass = '' %>
+			<% if (theme.busuanziStatistics && theme.busuanziStatistics.enable) { %>
+                <% socialClass = 'social-statis' %><br>
+                <% if (theme.busuanziStatistics && theme.busuanziStatistics.totalTraffic) { %>
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                <% } %>
+                <% if (theme.busuanziStatistics && theme.busuanziStatistics.totalNumberOfvisitors) { %>
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                <% } %>
+            <% } %>
         </div>
-        <div class="col s12 m12 l4 social-link hide-on-med-and-down">
-            <a href="https://github.com/smalbox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-                <i class="fa fa-github fa-lg"></i>
-            </a>
-            <a href="mailto:smal_box@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-                <i class="fa fa-envelope fa-lg"></i>
-            </a>
-            <a href="#!" class="tooltipped" data-tooltip="QQ: 1545018436" data-position="top" data-delay="50">
-                <i class="fa fa-qq fa-lg"></i>
-            </a>
-        </div>
+        <div class="col s12 m4 l4 social-link <%- socialClass %>"><%- partial('_partial/social-link') %></div>
     </div>
 </footer>
 
 <div class="progress-bar"></div>
-<script src="/libs/materialize/js/materialize.min.js"></script>
-<script src="/libs/masonry/masonry.pkgd.min.js"></script>
-<script src="/libs/aos/aos.js"></script>
-<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-<script src="/js/matery.js"></script>
-<script src="/js/search.js"></script>

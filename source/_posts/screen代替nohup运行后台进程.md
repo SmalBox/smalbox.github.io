@@ -2,6 +2,7 @@
 title: screen代替nohup运行后台进程
 date: 2018-11-08 19:37:56
 author: Smalbox
+categories: Linux
 tags:
   - nohup
   - screen

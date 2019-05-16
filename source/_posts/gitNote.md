@@ -2,6 +2,7 @@
 title: gitNote
 date: 2018-09-23 00:42:34
 author: SmalBox
+categories: 笔记
 img: /images/pageHeadImg/git.png
 tags:
   - git

@@ -2,6 +2,7 @@
 title: 安装Gitment及常见问题解决
 date: 2018-10-24 19:13:59
 author: SmalBox
+categories: 前端
 tags:
   - Gitment
 ---
