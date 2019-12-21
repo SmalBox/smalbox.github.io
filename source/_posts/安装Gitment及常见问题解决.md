@@ -110,7 +110,7 @@ gitment.render('container')
   1. 在服务器中clone作者的服务器源码
 
 ``` bash
-git clone https://github.com/SmalBox/gh-feed.git
+git clone https://github.com/SmalBox/gh-oauth-server.git
 ```
   2. 进入项目，下载依赖，并启动
 
@@ -126,10 +126,6 @@ npm install && nohup npm start &
 https://gh-oauth.imsun.net
 ```
 将其替换成刚才搭建服务器的地址即可。
-
-  >这里有一个我搭好的 **https://bak.smalbox.club** ,将其填进去即可使用。
-
-  >如果发现这个服务器失效了可以在下面**留言**或者**邮件**联系我，我会更新服务器。
 
 **OK大功告成，可以去测试一下了。可以在本站的下面回复评论测试。**
 
