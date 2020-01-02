@@ -203,3 +203,57 @@ $ git config --global http.https://github.com.proxy socks5://127.0.0.1:本地代
 $ git config --global --unset http.proxy
 $ git config --global --unset http.https://github.com.proxy
 ```
+
+## 19.Git Large File Storage
+
+去 Git Large File Storage [官网](https://git-lfs.github.com/)下载安装
+``` bash
+# 提供Git对大文件存储支持
+# 在每个git版本库下执行一下命令以提供大文件存储功能
+$ git lfs install
+$ git lfs track "*.psd"
+$ git add .gitattributes
+$ git commit -m "添加对psd文件的支持"
+```
+在git版本库的目录下修改 .gitattributes 即可快速添加支持文件
+例如在 .gitattributes 添加如下配置文件:
+
+``` bash
+# Image formats:
+*.tga filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.tif filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
+
+# Audio formats:
+*.mp3 filter=lfs diff=lfs merge=lfs -text
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.aiff filter=lfs diff=lfs merge=lfs -text
+
+# 3D model formats:
+*.fbx filter=lfs diff=lfs merge=lfs -text
+*.obj filter=lfs diff=lfs merge=lfs -text
+
+# Unity formats:
+*.sbsar filter=lfs diff=lfs merge=lfs -text
+*.unity filter=lfs diff=lfs merge=lfs -text
+
+# Other binary formats
+*.dll filter=lfs diff=lfs merge=lfs -text
+```
+
+## Q&A
+
+   - **Q1: Git push到远程时，遇到 “fatal: TaskCanceledException encountered” 错误**
+      - **A1:**
+	     - 在终端输入：
+		   ``` bash
+		   git config –global credential.helper store
+		   ```
+		 - 在.gitconfig文件中，可以看到多了一项：
+		   ``` bash
+		   [credential]
+		   helper = store
+		   ```
