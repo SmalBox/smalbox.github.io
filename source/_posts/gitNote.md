@@ -257,3 +257,21 @@ $ git commit -m "添加对psd文件的支持"
 		   [credential]
 		   helper = store
 		   ```
+   - **Q2: windows Git Bash 输入python无响应**
+      - **A2:**
+	     - 安装Git Bash 的时候有提示，MinTTY不支持交互操作，如Python和Node, 用winpty + program就可以运行了
+		 - 有三种方法：
+		    1. 利用winpty接口
+			   ``` bash
+			   winpty python
+			   ```
+			2. 显示使用python -i
+			   ``` bash
+			   python -i
+			   ```
+			3. 用git的alias按键映射，映射上述两方案
+			   ``` bash
+			   # 在 /etc/bash.bashrc 这个文件中加入
+			   alias python='winpty python'
+			   #然后重启bash，因为它每次重启时会读取bashrc文件来进行初始配置。
+			   ```
