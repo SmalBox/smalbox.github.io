@@ -57,7 +57,7 @@ tags:
 
 因为gitment是利用了github的issue，所以要注册OAuth application，来获取配置参数为接下来的配置做准备。
 
-[点击此处](https://github.com/settings/applications/new)来注册，一个新的 OAuth Application。其他内容可以随意填写，但要确保填入正确的 callback URL（一般是评论页面对应的域名，如 https://smalbox.club）。
+[点击此处](https://github.com/settings/applications/new)来注册，一个新的 OAuth Application。其他内容可以随意填写，但要确保填入正确的 callback URL（一般是评论页面对应的域名，如 https://smalbox.top）。
 
 注册后会给两个字符串 **Client ID** 和 **Client Secret** , 这两个下面配置的时候要用。
 
