@@ -244,6 +244,19 @@ $ git commit -m "添加对psd文件的支持"
 *.dll filter=lfs diff=lfs merge=lfs -text
 ```
 
+## 20.Git remove untracked files
+
+``` bash
+# 移除未被跟踪的文件
+$ git clean [-d] [-f] [-i] [-n] [-q] [-e <pattern>] [-x | -X] [--] <paths>...
+# 常用参数：
+# -n 试运行
+# -f 删除当前目录未跟踪文件，不删除文件夹
+# -df 删除未跟踪 文件和文件夹
+$ git -ndf # 试运行
+$ git -df # 运行清理
+```
+
 ## Q&A
 
    - **Q1: Git push到远程时，遇到 “fatal: TaskCanceledException encountered” 错误**
