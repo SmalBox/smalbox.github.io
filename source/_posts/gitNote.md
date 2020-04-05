@@ -288,3 +288,23 @@ $ git -df # 运行清理
 			   alias python='winpty python'
 			   #然后重启bash，因为它每次重启时会读取bashrc文件来进行初始配置。
 			   ```
+   - **Q3: Git HEAD detached from XXX**
+      - **A3:**
+	     - [解决源帖](https://www.jianshu.com/p/fdd3c2d020d7)
+		 - 解决方案简述
+		    - 新建个临时分支temp
+			   ``` bash
+			   $ git branch temp
+			   ```
+			- 切换到要恢复的分支master
+			   ``` bash
+			   $ git checkout master
+			   ```
+			- 合并临时分支temp到恢复分支master
+			   ``` bash
+			   $ git merge temp
+			   ```
+			- 删除临时分支temp
+			   ``` bash
+			   $ git branch -d temp
+			   ```
