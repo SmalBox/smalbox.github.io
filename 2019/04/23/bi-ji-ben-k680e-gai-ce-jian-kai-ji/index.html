@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>笔记本(K680e)改侧键开机</title>
+  
+  <link rel="canonical" href="https://autozcy.gitee.io/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/">
+  
+  <meta name="description" content="笔记本(K680e)改侧键开机前言想把神船本当主机用，无奈开机键在本子C面，必须要打开盖子才能开机，实在是太麻烦。于是准备将开机键改装到本子的侧面，这样就能实现在合着盖子的情况下，按侧面的按钮开机，让神船本成为移动主机。  改装思路 本子的开机键附近有一个安全锁孔，可以利用他的空间做开机按钮 用万用">
+  
+  
+  <meta name="author" content="SmalBox">
+  
+  <meta property="og:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta property="og:site_name" content="SmalBoxBlog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="笔记本(K680e)改侧键开机" />
+  
+  <meta property="og:description" content="笔记本(K680e)改侧键开机前言想把神船本当主机用，无奈开机键在本子C面，必须要打开盖子才能开机，实在是太麻烦。于是准备将开机键改装到本子的侧面，这样就能实现在合着盖子的情况下，按侧面的按钮开机，让神船本成为移动主机。  改装思路 本子的开机键附近有一个安全锁孔，可以利用他的空间做开机按钮 用万用">
+  
+  <meta property="og:url" content="https://autozcy.gitee.io/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="笔记本(K680e)改侧键开机">
+  
+  <meta name="twitter:description" content="笔记本(K680e)改侧键开机前言想把神船本当主机用，无奈开机键在本子C面，必须要打开盖子才能开机，实在是太麻烦。于是准备将开机键改装到本子的侧面，这样就能实现在合着盖子的情况下，按侧面的按钮开机，让神船本成为移动主机。  改装思路 本子的开机键附近有一个安全锁孔，可以利用他的空间做开机按钮 用万用">
+  
+  
+  <meta name="twitter:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta name="twitter:url" content="https://autozcy.gitee.io/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      脑洞杂货铺
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/archives" class="ml">Archives</a>
+          
+        
+        
+          
+            <a href="mailto:smal_box@163.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>笔记本(K680e)改侧键开机</h2>
+
+  <h1 id="笔记本-K680e-改侧键开机"><a href="#笔记本-K680e-改侧键开机" class="headerlink" title="笔记本(K680e)改侧键开机"></a>笔记本(K680e)改侧键开机</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p>想把神船本当主机用，无奈开机键在本子C面，必须要打开盖子才能开机，实在是太麻烦。于是准备将开机键改装到本子的侧面，这样就能实现在合着盖子的情况下，按侧面的按钮开机，让神船本成为移动主机。</p>
+<ul>
+<li><strong>改装思路</strong><ol>
+<li>本子的开机键附近有一个<strong>安全锁孔</strong>，可以利用他的空间做开机按钮</li>
+<li>用万用表找到开机键要<strong>短接</strong>的两个触点</li>
+<li>将触点<strong>用导线引出</strong>，加装一个开关做外接开关</li>
+<li>做一个<strong>开关按键</strong></li>
+<li>用<strong>热熔胶</strong>固定开关</li>
+<li><strong>理线</strong>还原机器</li>
+</ol>
+</li>
+</ul>
+<h2 id="成品"><a href="#成品" class="headerlink" title="成品"></a><strong>成品</strong></h2><ul>
+<li>先看一下成品吧<br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/finishedProduct.jpg" alt="finishedProduct"></li>
+<li>图中<strong>白色按钮</strong>就是新的<strong>侧开关键</strong>，使用方法和本机开关一样，点击开机，长按断电关机。</li>
+</ul>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a><strong>过程</strong></h2><ol>
+<li><p>根据改装思路找到<strong>安全锁孔</strong>，如图：<br><img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/safeHole.jpg" alt="safeHole"><br><img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/safeHoleInner.jpg" alt="safeHoleInner"></p>
+</li>
+<li><p>拆机，找到<strong>开机键</strong>的小开关</p>
+<ul>
+<li>开关有<strong>四个</strong>触角接到PCB板上，<em>（这里用<strong>万用表的电阻挡测量</strong>其中两个触角，找到接上触点没有偏转，但是按下开关有偏转的两个触点，我的是<strong>对角线</strong>的两个触点，可以先试试）</em></li>
+<li>根据找到的<strong>触点</strong>，用导线将两个触点接出来。<em>（因为触点太小，所以焊锡很难接的牢固，下图看到我接的很丑，就是因为很难接牢，重复了好多次。最后还是用了101胶点了两下确定牢固）</em></li>
+<li><strong>下图是接好的样子：</strong><br><img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/weldButton.jpg" alt="weldButton"></li>
+</ul>
+</li>
+<li><p>找一个<strong>开关</strong></p>
+<ul>
+<li>手头上有一个坏掉的鼠标，就想着把鼠标的<strong>按键开关</strong>做开机开关</li>
+<li><strong>如图这个绿色鼠标开关：</strong><br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/mouse.jpg" alt="mouse"></li>
+<li>由于这个开关有三个脚，所以用万用表的点阻挡测试开关那两个脚是需要的。原理同测试本子开关一样，<strong>连接上表不转，按住开关，表转，说明这俩个脚就是要用的引脚</strong></li>
+<li><strong>如图将两个引脚连接上：</strong><br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/mouseButton.jpg" alt="mouseButton"></li>
+</ul>
+</li>
+<li><p>做一个<strong>按钮</strong></p>
+<ul>
+<li>由于我手里有3D打印其他东西的废料，所以就就地取材，直接用电烙铁将它切成要用的形状。</li>
+<li>当然如果有别的成块的塑料之类的东西也可以尝试。</li>
+<li>具体方法是将<strong>电烙铁的头</strong>卸下，换上<strong>美工刀</strong>的一段<strong>刀片</strong>，给电烙铁通电加热，将塑料切所要的形状，最后给按钮烫出一个<strong>小底托</strong>即可。</li>
+<li><em>（<strong>可以用任何别的东西代替，我也可以提供3D打印的按钮，这里我图快，就凑合了一个，没有打印</strong>）</em></li>
+<li><em>（<strong>注意！！！长度控制在放到孔中基本上和机器外边缘平齐，防止误触！！！</strong>）</em></li>
+<li><strong>按钮如图：</strong><br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/button.jpg" alt="button"></li>
+</ul>
+</li>
+<li><p>将按钮装进<strong>安全孔</strong></p>
+<ul>
+<li><strong>如图将按钮装进安全孔的样子：</strong><ul>
+<li>外部<br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/safeHoleButton.jpg" alt="safeHoleButton"><br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/safeHoleButton2.jpg" alt="safeHoleButton2"></li>
+<li>内部<br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/safeHoleButtonInner.jpg" alt="safeHoleButtonInner"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>将<strong>开关</strong>装进<strong>安全孔</strong></p>
+<ul>
+<li>先将鼠标上拆下来的开关放进去看看大小位置，<em>（<strong>注意！！！按钮不要长出机器边缘，否则容易误触</strong>）</em></li>
+<li><strong>如图：</strong><br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/clickButton.jpg" alt="clickButton"></li>
+<li>用热熔枪将开关固定到合适的位置，<em>（<strong>注意不要将活动的外面按钮粘住</strong>）</em></li>
+<li><strong>如图：</strong><br> <img src="/2019/04/23/bi-ji-ben-k680e-gai-ce-jian-kai-ji/holdClickButton.jpg" alt="holdClickButton"></li>
+</ul>
+</li>
+<li><p><strong>理线</strong></p>
+<ul>
+<li>这个就根据机型内部具体情况进行理线了，大多数机器内部都还是有一定空隙，可以将线藏进去。</li>
+</ul>
+</li>
+<li><p><strong>扣盖子还原</strong></p>
+<ul>
+<li>这部分因机型而异了。</li>
+<li>我在还原的时候发现我占用了一个侧边的螺丝孔，所以边缘的一个螺丝上不了了，但是只要理线合理，缝隙还是可以接受的。</li>
+<li>因为占用的是安全锁孔，所以盖子上肯定有一个塑料挡着，这时就需要将其多余的地方用镊子掐掉，掐掉的是非受力点，所以对本子是没有他打损伤的。外观是完全看不到的。</li>
+</ul>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><ul>
+<li><p><strong>优点</strong></p>
+<ol>
+<li>可以<strong>合盖开机</strong></li>
+<li><strong>手感清脆</strong>，取决于找到的开关</li>
+</ol>
+</li>
+<li><p><strong>缺点</strong></p>
+<ol>
+<li>占用了一个<strong>安全锁</strong>位置</li>
+<li>占用了一个边角<strong>螺丝位</strong></li>
+<li>原开机按钮失灵了（可能是点胶的时候粘住了），好在原来的按钮也不好用，失灵了也还好，毕竟<strong>侧键更好用</strong>。</li>
+</ol>
+</li>
+<li><p>借鉴神船本的改装经验，可以给<strong>其他本子</strong>改装侧边开机键。一般笔记本中的空隙还是可以容纳得下引出来的线的。</p>
+</li>
+<li><p>如果可以淘到<strong>更小的开关</strong>，就可以不破环或者较少对本子的破坏完成改造。</p>
+</li>
+<li><p>按钮可以用其他东西替代，如果能买到类似安全锁孔的按钮那就是最完美的了。实在没有，用3d打印机打印也是可以的，我这回着急弄，就没有打印，直接切的料。<em>（<strong>如果有需要可以邮箱联系我定制3D打印开关</strong>）</em></p>
+</li>
+</ul>
+
+  <p><a class="classtest-link" href="/tags/diy/" rel="tag">diy</a>, <a class="classtest-link" href="/tags/%E6%94%B9%E4%BE%A7%E5%BC%80%E6%9C%BA%E9%94%AE/" rel="tag">改侧开机键</a>, <a class="classtest-link" href="/tags/%E7%AC%94%E8%AE%B0%E6%9C%AC/" rel="tag">笔记本</a> — 2019年4月23日</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with 
+        <a href="https://github.com/smalbox" target="_blank">SmalBox</a>
+         and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/smalbox" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

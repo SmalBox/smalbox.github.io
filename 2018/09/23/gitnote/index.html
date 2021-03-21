@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>gitNote</title>
+  
+  <link rel="canonical" href="https://autozcy.gitee.io/2018/09/23/gitnote/">
+  
+  <meta name="description" content="Git command noteInstall: initialize user name and user email.$ git config --global user.name &#34;Your Name&#34; $ git config --global user.email &#34;email@examp">
+  
+  
+  <meta name="author" content="SmalBox">
+  
+  <meta property="og:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta property="og:site_name" content="SmalBoxBlog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="gitNote" />
+  
+  <meta property="og:description" content="Git command noteInstall: initialize user name and user email.$ git config --global user.name &#34;Your Name&#34; $ git config --global user.email &#34;email@examp">
+  
+  <meta property="og:url" content="https://autozcy.gitee.io/2018/09/23/gitnote/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="gitNote">
+  
+  <meta name="twitter:description" content="Git command noteInstall: initialize user name and user email.$ git config --global user.name &#34;Your Name&#34; $ git config --global user.email &#34;email@examp">
+  
+  
+  <meta name="twitter:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta name="twitter:url" content="https://autozcy.gitee.io/2018/09/23/gitnote/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      脑洞杂货铺
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/archives" class="ml">Archives</a>
+          
+        
+        
+          
+            <a href="mailto:smal_box@163.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>gitNote</h2>
+
+  <h1 id="Git-command-note"><a href="#Git-command-note" class="headerlink" title="Git command note"></a>Git command note</h1><h2 id="Install-initialize-user-name-and-user-email"><a href="#Install-initialize-user-name-and-user-email" class="headerlink" title="Install: initialize user name and user email."></a>Install: initialize user name and user email.</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --global user.name <span class="token string">"Your Name"</span>
+$ <span class="token function">git</span> config --global user.email <span class="token string">"email@example.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="1-Create-git"><a href="#1-Create-git" class="headerlink" title="1.Create git"></a>1.Create git</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">mkdir</span> learnBox <span class="token comment">#创建目录作为仓库</span>
+$ <span class="token builtin class-name">cd</span> learnBox <span class="token comment">#进入目录</span>
+$ <span class="token builtin class-name">pwd</span> <span class="token comment">#显示仓库位置</span>
+$ <span class="token function">git</span> init <span class="token comment">#创建仓库（仓库根目录下有.git的隐藏目录，用ls -ah可以看到）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="2-Add-amp-Commit-file"><a href="#2-Add-amp-Commit-file" class="headerlink" title="2.Add &amp; Commit file"></a>2.Add &amp; Commit file</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> <span class="token function">add</span> readme.txt <span class="token comment">#添加文件到仓库</span>
+$ <span class="token function">git</span> commit -m <span class="token string">"add readme.txt"</span> <span class="token comment">#提交以上添加，填写修改信息</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="3-Check-the-status-amp-difference"><a href="#3-Check-the-status-amp-difference" class="headerlink" title="3.Check the status &amp; difference"></a>3.Check the status &amp; difference</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> status <span class="token comment">#查看仓库状态</span>
+$ <span class="token function">git</span> <span class="token function">diff</span> readme.txt <span class="token comment">#查看具体修改了哪些</span>
+$ <span class="token function">git</span> log <span class="token comment">#从近到远查看提交日志</span>
+$ <span class="token function">git</span> log --pretty<span class="token operator">=</span>oneline <span class="token comment">#简化日志每个只显示一行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="4-Reset"><a href="#4-Reset" class="headerlink" title="4.Reset"></a>4.Reset</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> reset --hard HEAD^ <span class="token comment">#退回上一个版本 '^'退回一个 '~100'退100个</span>
+$ <span class="token function">git</span> reset --hard <span class="token operator">&lt;</span>version id<span class="token operator">></span> <span class="token comment">#版本号写前几位即可，git自己会找</span>
+$ <span class="token function">git</span> reflog <span class="token comment">#记录执行过的命令</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="5-Stage-index"><a href="#5-Stage-index" class="headerlink" title="5.Stage(index)"></a>5.Stage(index)</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">使用 <span class="token string">"git add"</span> 命令将工作区文件添加到stage暂存区。
+使用 <span class="token string">"git commit"</span> 命令将stage暂存区中文件添加到分支。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="6-Manage-modify"><a href="#6-Manage-modify" class="headerlink" title="6.Manage modify"></a>6.Manage modify</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">先add添加到stage，后commit到分支。
+$ <span class="token function">git</span> <span class="token function">diff</span> HEAD -- readme.txt <span class="token comment">#查看工作区和版本库中最新版本区别</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="7-Undo-changes"><a href="#7-Undo-changes" class="headerlink" title="7.Undo changes"></a>7.Undo changes</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span><span class="token punctuation">)</span>无add无commit：
+	$ <span class="token function">git</span> checkout -- <span class="token operator">&lt;</span>file<span class="token operator">></span>
+<span class="token number">2</span><span class="token punctuation">)</span>有add无commit：
+	$ <span class="token function">git</span> reset HEAD <span class="token operator">&lt;</span>file<span class="token operator">></span>
+	$ <span class="token function">git</span> checkout -- <span class="token operator">&lt;</span>file<span class="token operator">></span>
+<span class="token number">3</span><span class="token punctuation">)</span>有add有commit：
+	$ <span class="token function">git</span> reset --hard HEAD^<span class="token comment">#退回上一版本</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="8-Remove-file"><a href="#8-Remove-file" class="headerlink" title="8.Remove file"></a>8.Remove file</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">rm</span> <span class="token operator">&lt;</span>file<span class="token operator">></span> <span class="token comment">#删除工作区的文件</span>
+$ <span class="token function">git</span> <span class="token function">rm</span> <span class="token operator">&lt;</span>file<span class="token operator">></span> <span class="token comment">#如果真的想删，删除版本库里的文件</span>
+$ <span class="token function">git</span> checkout -- <span class="token operator">&lt;</span>file<span class="token operator">></span> <span class="token comment">#误删了工作区文件，用版本库恢复删除文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="Remote-repository"><a href="#Remote-repository" class="headerlink" title="Remote repository"></a>Remote repository</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ssh-keygen -t rsa -C <span class="token string">"email@example.com"</span> <span class="token comment">#创建ssh协议公钥和私钥</span>
+<span class="token comment">#进入到GitHub中添加ssh key 即可远程推送</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="9-Add-and-remove-remote-repository"><a href="#9-Add-and-remove-remote-repository" class="headerlink" title="9.Add and remove remote repository"></a>9.Add and remove remote repository</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/SmalBox/learngit.git
+$ <span class="token function">git</span> remote <span class="token function">add</span> origin git@github.com:SmalBox/learngit.git
+<span class="token comment">#GitHub上的提示添加远程库.这两种都可以</span>
+$ <span class="token function">git</span> remote <span class="token function">rm</span> <span class="token operator">&lt;</span>remote name<span class="token operator">></span> <span class="token comment">#移除远程库</span>
+$ <span class="token function">git</span> push -u origin master <span class="token comment">#将本地库推送到GitHub</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="10-Clone-from-remote-repository"><a href="#10-Clone-from-remote-repository" class="headerlink" title="10.Clone from remote repository"></a>10.Clone from remote repository</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> clone git@github.com:SmalBox/repositoryName.git <span class="token comment">#从远程克隆到本地</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="Manage-branch"><a href="#Manage-branch" class="headerlink" title="Manage branch"></a>Manage branch</h2><h2 id="11-Create-amp-Combine-branch"><a href="#11-Create-amp-Combine-branch" class="headerlink" title="11.Create &amp; Combine branch"></a>11.Create &amp; Combine branch</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> branch <span class="token comment">#查看分支结构</span>
+$ <span class="token function">git</span> branch <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token comment">#创建分支</span>
+$ <span class="token function">git</span> checkout <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token comment">#切换分支</span>
+$ <span class="token function">git</span> checkout -b <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token comment">#创建并切换分支</span>
+$ <span class="token function">git</span> merge <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token comment">#合并某分支到当前分支</span>
+$ <span class="token function">git</span> branch -d <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token comment">#删除某分支</span>
+$ <span class="token function">git</span> branch -D <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token comment">#强行删除某分支，例如强行删除未合并的分支</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -b dev <span class="token comment">#创建并切换 到dev分支</span>
+$ <span class="token function">git</span> branch <span class="token comment">#查看 分支</span>
+$ <span class="token function">git</span> checkout master <span class="token comment">#切换 到master分支</span>
+$ <span class="token function">git</span> merge dev <span class="token comment">#把dev分支 合并 到master分支</span>
+$ <span class="token function">git</span> branch -d dev <span class="token comment">#删除 dev分支</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="12-Conflict-fixed"><a href="#12-Conflict-fixed" class="headerlink" title="12.Conflict fixed"></a>12.Conflict fixed</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#当两个分支修改同一个文件，合并时产生冲突。</span>
+<span class="token comment">#在当前分支修改冲突文件，再add和commit之后重新合并。</span>
+$ <span class="token function">git</span> log --graph --pretty<span class="token operator">=</span>oneline --addrev-commit <span class="token comment">#查看分之合并图</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="13-Branch-strategy"><a href="#13-Branch-strategy" class="headerlink" title="13.Branch strategy"></a>13.Branch strategy</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge --no-ff -m <span class="token string">"merge with no-ff"</span> dev <span class="token comment">#不使用Fast</span>
+forward合并，创建一个commit记录。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="14-Bug-branch-Stach"><a href="#14-Bug-branch-Stach" class="headerlink" title="14.Bug branch(Stach)"></a>14.Bug branch(Stach)</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> stash <span class="token comment">#把暂时没完成的分支储藏起来</span>
+$ <span class="token function">git</span> stash list <span class="token comment">#列出存储的各个版本</span>
+$ <span class="token function">git</span> stash pop <span class="token comment">#恢复储藏，并删除stach记录</span>
+$ <span class="token function">git</span> stash apply stash@<span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span> <span class="token comment">#恢复到stash0</span>
+$ <span class="token function">git</span> stash drop <span class="token comment">#删除stash内容</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="15-Collaboration"><a href="#15-Collaboration" class="headerlink" title="15.Collaboration"></a>15.Collaboration</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token comment">#查看远程仓库信息(name)</span>
+$ <span class="token function">git</span> remote -v <span class="token comment">#查看远程仓库详细信息</span>
+$ <span class="token function">git</span> push <span class="token operator">&lt;</span>git name<span class="token operator">></span> <span class="token operator">&lt;</span>branch name<span class="token operator">></span> <span class="token comment">#推送分支 例如：git push origin master</span>
+$ <span class="token function">git</span> checkout -b dev origin/dev <span class="token comment">#创建本地dev链接远程仓库中的dev</span>
+$ <span class="token function">git</span> pull <span class="token comment">#推送失败，远程分支新，用此试图合并</span>
+$ <span class="token function">git</span> <span class="token function">git</span>  branch --set-upstream-to<span class="token operator">=</span><span class="token operator">&lt;</span>remote name<span class="token operator">></span>/<span class="token operator">&lt;</span>branch name<span class="token operator">></span> <span class="token comment">#无跟踪信息时，说明本地分支与远程分支没有建立关系，用此建立</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="16-Tag"><a href="#16-Tag" class="headerlink" title="16.Tag"></a>16.Tag</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> tag <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token comment">#给当前分支打标签,标签打在最新提交的commit上</span>
+$ <span class="token function">git</span> tag <span class="token comment">#查看当前分支的标签</span>
+$ <span class="token function">git</span> tag <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token operator">&lt;</span>commit id<span class="token operator">></span> <span class="token comment">#给某一个版本的commit打标签</span>
+$ <span class="token function">git</span> tag -a <span class="token operator">&lt;</span>tag name<span class="token operator">></span> -m <span class="token string">"description"</span> <span class="token operator">&lt;</span>commit id<span class="token operator">></span> <span class="token comment">#带有说明的标签</span>
+$ <span class="token function">git</span> tag -s <span class="token operator">&lt;</span>tag name<span class="token operator">></span> -m <span class="token string">"description"</span> <span class="token operator">&lt;</span>commit id<span class="token operator">></span> <span class="token comment">#私钥签名一个标签</span>
+$ <span class="token function">git</span> show <span class="token operator">&lt;</span>tag name<span class="token operator">></span> <span class="token comment">#查看标签信息</span>
+$ <span class="token function">git</span> tag -d <span class="token operator">&lt;</span>tag name<span class="token operator">></span> <span class="token comment">#删除标签</span>
+$ <span class="token function">git</span> push <span class="token operator">&lt;</span>remote name<span class="token operator">></span> <span class="token operator">&lt;</span>tag name<span class="token operator">></span> <span class="token comment">#推送某一标签到远程仓库</span>
+$ <span class="token function">git</span> push <span class="token operator">&lt;</span>remote name<span class="token operator">></span> --tags <span class="token comment">#推送全部标签到远程</span>
+<span class="token comment">#删除远程标签，要先删除本地标签，再推送远程。格式如下：</span>
+$ <span class="token function">git</span> tag -d <span class="token operator">&lt;</span>tag name<span class="token operator">></span> <span class="token comment">#删除本地标签</span>
+$ <span class="token function">git</span> push <span class="token operator">&lt;</span>remote name<span class="token operator">></span> :refs/tags/<span class="token operator">&lt;</span>tag name<span class="token operator">></span> <span class="token comment">#推送远程</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="17-Alias"><a href="#17-Alias" class="headerlink" title="17.Alias"></a>17.Alias</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --global alias.co checkout <span class="token comment">#设置全局简写</span>
+$ <span class="token function">git</span> config --global alias.st status 
+$ <span class="token function">git</span> config --global alias.ci commit
+$ <span class="token function">git</span> config --global alias.br branch
+$ <span class="token function">git</span> config --global alias.lol <span class="token string">"log --pretty=oneline"</span>
+$ <span class="token function">git</span> config --global alias.glol <span class="token string">"log --graph --pretty=oneline --abbrev-commit"</span>
+<span class="token comment">#全局的配置文件在用户目录下名为：.gitconfig中记录。每个仓库的配置文件在仓库下的.git文件下config文件中记录</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="18-Setting-up-a-proxy"><a href="#18-Setting-up-a-proxy" class="headerlink" title="18.Setting up a proxy"></a>18.Setting up a proxy</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 设置只对github代理</span>
+$ <span class="token function">git</span> config --global http.https://github.com.proxy socks5://127.0.0.1:本地代理端口号
+<span class="token comment"># 取消代理</span>
+$ <span class="token function">git</span> config --global --unset http.proxy
+$ <span class="token function">git</span> config --global --unset http.https://github.com.proxy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="19-Git-Large-File-Storage"><a href="#19-Git-Large-File-Storage" class="headerlink" title="19.Git Large File Storage"></a>19.Git Large File Storage</h2><p>去 Git Large File Storage <a target="_blank" rel="noopener" href="https://git-lfs.github.com/">官网</a>下载安装</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 提供Git对大文件存储支持</span>
+<span class="token comment"># 在每个git版本库下执行一下命令以提供大文件存储功能</span>
+$ <span class="token function">git</span> lfs <span class="token function">install</span>
+$ <span class="token function">git</span> lfs track <span class="token string">"*.psd"</span>
+$ <span class="token function">git</span> <span class="token function">add</span> .gitattributes
+$ <span class="token function">git</span> commit -m <span class="token string">"添加对psd文件的支持"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在git版本库的目录下修改 .gitattributes 即可快速添加支持文件<br>例如在 .gitattributes 添加如下配置文件:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Image formats:</span>
+*.tga <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.png <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.tif <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.jpg <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.gif <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.psd <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+
+<span class="token comment"># Audio formats:</span>
+*.mp3 <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.wav <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.aiff <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+
+<span class="token comment"># 3D model formats:</span>
+*.fbx <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.obj <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+
+<span class="token comment"># Unity formats:</span>
+*.sbsar <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+*.unity <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text
+
+<span class="token comment"># Other binary formats</span>
+*.dll <span class="token assign-left variable">filter</span><span class="token operator">=</span>lfs <span class="token assign-left variable">diff</span><span class="token operator">=</span>lfs <span class="token assign-left variable">merge</span><span class="token operator">=</span>lfs -text<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="20-Git-remove-untracked-files"><a href="#20-Git-remove-untracked-files" class="headerlink" title="20.Git remove untracked files"></a>20.Git remove untracked files</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 移除未被跟踪的文件</span>
+$ <span class="token function">git</span> clean <span class="token punctuation">[</span>-d<span class="token punctuation">]</span> <span class="token punctuation">[</span>-f<span class="token punctuation">]</span> <span class="token punctuation">[</span>-i<span class="token punctuation">]</span> <span class="token punctuation">[</span>-n<span class="token punctuation">]</span> <span class="token punctuation">[</span>-q<span class="token punctuation">]</span> <span class="token punctuation">[</span>-e <span class="token operator">&lt;</span>pattern<span class="token operator">></span><span class="token punctuation">]</span> <span class="token punctuation">[</span>-x <span class="token operator">|</span> -X<span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token punctuation">]</span> <span class="token operator">&lt;</span>paths<span class="token operator">></span><span class="token punctuation">..</span>.
+<span class="token comment"># 常用参数：</span>
+<span class="token comment"># -n 试运行</span>
+<span class="token comment"># -f 删除当前目录未跟踪文件，不删除文件夹</span>
+<span class="token comment"># -df 删除未跟踪 文件和文件夹</span>
+$ <span class="token function">git</span> -ndf <span class="token comment"># 试运行</span>
+$ <span class="token function">git</span> -df <span class="token comment"># 运行清理</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><ul>
+<li><strong>Q1: Git push到远程时，遇到 “fatal: TaskCanceledException encountered” 错误</strong><ul>
+<li><strong>A1:</strong><ul>
+<li>在终端输入：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config –global credential.helper store<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>在.gitconfig文件中，可以看到多了一项：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>credential<span class="token punctuation">]</span>
+helper <span class="token operator">=</span> store<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Q2: windows Git Bash 输入python无响应</strong><ul>
+<li><strong>A2:</strong><ul>
+<li>安装Git Bash 的时候有提示，MinTTY不支持交互操作，如Python和Node, 用winpty + program就可以运行了</li>
+<li>有三种方法：<ol>
+<li>利用winpty接口<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">winpty python<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>显示使用python -i<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python -i<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>用git的alias按键映射，映射上述两方案<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 在 /etc/bash.bashrc 这个文件中加入</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token string">'winpty python'</span>
+<span class="token comment">#然后重启bash，因为它每次重启时会读取bashrc文件来进行初始配置。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Q3: Git HEAD detached from XXX</strong><ul>
+<li><strong>A3:</strong><ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fdd3c2d020d7">解决源帖</a></li>
+<li>解决方案简述<ul>
+<li>新建个临时分支temp <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> branch temp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>切换到要恢复的分支master <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>合并临时分支temp到恢复分支master <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge temp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>删除临时分支temp <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> branch -d temp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <p><a class="classtest-link" href="/tags/git/" rel="tag">git</a>, <a class="classtest-link" href="/tags/note/" rel="tag">note</a> — 2018年9月23日</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with 
+        <a href="https://github.com/smalbox" target="_blank">SmalBox</a>
+         and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/smalbox" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

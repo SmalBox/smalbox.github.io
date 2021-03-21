@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>抢救群晖系统简述</title>
+  
+  <link rel="canonical" href="https://autozcy.gitee.io/2019/07/14/qiang-jiu-qun-hui-xi-tong-jian-shu/">
+  
+  <meta name="description" content="抢救群晖系统简述前言群晖（Synology）在接电的时候崩出了火花，导致硬盘短路跪了，系统也莫名跪了。好在组的raid1，有一块硬盘是好的，还能抢救。 抢救的关键是要知道崩了的系统的机型版本，否则引导不起来系统。  抢救思路  用虚拟机安装一个同型号、同版本的群晖系统 虚拟机进入PE，在PE中对刚安">
+  
+  
+  <meta name="author" content="SmalBox">
+  
+  <meta property="og:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta property="og:site_name" content="SmalBoxBlog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="抢救群晖系统简述" />
+  
+  <meta property="og:description" content="抢救群晖系统简述前言群晖（Synology）在接电的时候崩出了火花，导致硬盘短路跪了，系统也莫名跪了。好在组的raid1，有一块硬盘是好的，还能抢救。 抢救的关键是要知道崩了的系统的机型版本，否则引导不起来系统。  抢救思路  用虚拟机安装一个同型号、同版本的群晖系统 虚拟机进入PE，在PE中对刚安">
+  
+  <meta property="og:url" content="https://autozcy.gitee.io/2019/07/14/qiang-jiu-qun-hui-xi-tong-jian-shu/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="抢救群晖系统简述">
+  
+  <meta name="twitter:description" content="抢救群晖系统简述前言群晖（Synology）在接电的时候崩出了火花，导致硬盘短路跪了，系统也莫名跪了。好在组的raid1，有一块硬盘是好的，还能抢救。 抢救的关键是要知道崩了的系统的机型版本，否则引导不起来系统。  抢救思路  用虚拟机安装一个同型号、同版本的群晖系统 虚拟机进入PE，在PE中对刚安">
+  
+  
+  <meta name="twitter:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta name="twitter:url" content="https://autozcy.gitee.io/2019/07/14/qiang-jiu-qun-hui-xi-tong-jian-shu/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      脑洞杂货铺
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/archives" class="ml">Archives</a>
+          
+        
+        
+          
+            <a href="mailto:smal_box@163.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>抢救群晖系统简述</h2>
+
+  <h1 id="抢救群晖系统简述"><a href="#抢救群晖系统简述" class="headerlink" title="抢救群晖系统简述"></a>抢救群晖系统简述</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p>群晖（Synology）在接电的时候崩出了火花，导致硬盘短路跪了，系统也莫名跪了。好在组的raid1，有一块硬盘是好的，还能抢救。</p>
+<p>抢救的关键是要知道崩了的系统的机型版本，否则引导不起来系统。</p>
+<ul>
+<li><p>抢救思路</p>
+<ol>
+<li>用<strong>虚拟机</strong>安装一个<strong>同型号</strong>、<strong>同版本</strong>的群晖系统</li>
+<li>虚拟机进入<strong>PE</strong>，在PE中对刚安装的群晖系统进行备份</li>
+<li>用PE <strong>U盘</strong> 进入群晖机器，将备份的系统恢复到群晖机器中</li>
+<li>制作新的群晖<strong>引导U盘</strong></li>
+</ol>
+</li>
+<li><p>我的硬件背景</p>
+<ul>
+<li>产品型号：DS3617xs</li>
+<li>系统版本：6.1-15047</li>
+<li>硬盘阵列：raid1</li>
+</ul>
+</li>
+</ul>
+<h2 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a><strong>软件下载</strong></h2><ul>
+<li><strong>软件清单：</strong> <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">├── DS367xs-15047-6_1-安装包引导
+│   ├── DS3617xs-15047-安装包
+│   │   └── DSM_DS3617xs_15047.pat
+│   └── ds3617_61-引导
+│       └── synoboot.img
+├── PE
+│   ├── PE镜像
+│   │   └── Win10PE_Ver.3.6.iso
+│   └── u盘PE及恢复软件
+│       ├── ATIH2019.23.3.1.x64.PE.exe
+│       └── WePE_64_V2.0.exe
+└── 抢救群晖系统-工具
+    ├── DiskImage_1_6_WinAll_Setup.exe
+    ├── SynologyAssistantSetup-6.0-7319群晖助手.exe
+    ├── chipeasy1.630芯片无忧.exe
+    └── win32_disk_imager启动盘制作工具.zip<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>所需软件都<strong>分别打包</strong>，可<strong>按需下载</strong></li>
+<li><strong>下载地址</strong><ul>
+<li>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1rrzoI7m4eZVnSyiKmewmRw">https://pan.baidu.com/s/1rrzoI7m4eZVnSyiKmewmRw</a> </li>
+<li>提取码: ka9b</li>
+</ul>
+</li>
+</ul>
+<h2 id="启动前准备"><a href="#启动前准备" class="headerlink" title="启动前准备"></a><strong>启动前准备</strong></h2><ol>
+<li><strong>创建磁盘</strong><ul>
+<li>管理员权限运行cmd或powershell输入：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">diskpart <span class="token comment"># 进入diskpart工具</span>
+create vdisk <span class="token assign-left variable">file</span><span class="token operator">=</span>c:<span class="token punctuation">\</span>synoboot.vhd <span class="token assign-left variable">maximum</span><span class="token operator">=</span><span class="token number">50</span> <span class="token assign-left variable">type</span><span class="token operator">=</span>expandable <span class="token comment"># file后路径填一个本机可用路径即可</span>
+attach vdisk <span class="token comment"># 选中创建的路径</span>
+create partition primary <span class="token comment"># 创建主分区</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><strong>引导写入磁盘</strong><ul>
+<li>用Roadkil’s Disk Image软件将引导写入1创建的磁盘</li>
+</ul>
+</li>
+<li><strong>调整虚拟机bios进入系统</strong><ul>
+<li>打开电源时进入固件，在boot中调整启动项。保存重启进入系统。</li>
+</ul>
+</li>
+</ol>
+<h2 id="系统备份"><a href="#系统备份" class="headerlink" title="系统备份"></a><strong>系统备份</strong></h2><ol>
+<li>加入一个光驱，选择一个PE iso镜像。调整启动项，重启进入PE</li>
+<li>在PE中用Acronis True Image Home for PE备份系统（2.4g的那个分区）</li>
+</ol>
+<h2 id="系统还原"><a href="#系统还原" class="headerlink" title="系统还原"></a><strong>系统还原</strong></h2><ol>
+<li>进入要还原的NAS的PE。用Acronis True Image Home for PE还原系统到对应位置</li>
+</ol>
+<h2 id="制作U盘引导"><a href="#制作U盘引导" class="headerlink" title="制作U盘引导"></a><strong>制作U盘引导</strong></h2><ol>
+<li>用ChipGenius先查看U盘的 vid uid</li>
+<li>格式化U盘，然后用Win32DiskImager将引导刷入U盘</li>
+<li>修改grub.cfg中 vid uid 的值<ul>
+<li>挂载引导盘符<ul>
+<li>以管理员权限运行cmd或powershell输入：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">diskpart <span class="token comment"># 启动diskpart工具</span>
+list disk <span class="token comment">#  列出系统中拥有的磁盘</span>
+<span class="token keyword">select</span> disk <span class="token number">0</span>  <span class="token comment"># 选择EFI引导分区所在的磁盘，请根据实际情况选择</span>
+list partition  <span class="token comment"># 列出所选磁盘拥有的分区</span>
+<span class="token keyword">select</span> partition <span class="token number">1</span>  <span class="token comment"># 选择EFI引导分区，类型为系统的分区，就是EFI引导分区</span>
+<span class="token builtin class-name">set</span> <span class="token assign-left variable">id</span><span class="token operator">=</span>ebd0a0a2-b9e5-4433-87c0-68b6b72699c7  <span class="token comment"># 设置磁盘ID</span>
+assign <span class="token assign-left variable">letter</span><span class="token operator">=</span>p  <span class="token comment"># 为所选分区分配盘符，请分配空闲盘符</span>
+
+remove <span class="token assign-left variable">letter</span><span class="token operator">=</span>p  <span class="token comment"># 修改完成后，移除盘符（如果不移除，重启计算机以后，会自动移除）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li>修改grub.cfg<ul>
+<li>以管理员权限运行cmd或powershell输入：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">notepad<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>在打开的记事本中，点击打开。在跳出的文件管理器中操作efi中的grub.cfg文件。将其中的 vid uid 值改成u盘的值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><ul>
+<li>抢救对机型、系统版本非常严格，如果不对很有可能引导失败</li>
+<li>本文给出了对应机型所需要的工具，如果非本机型，可自行下载更换<strong>引导镜像</strong>、<strong>安装包</strong>，其他步骤不变</li>
+<li>本文是<strong>简述版</strong>，<strong>无图</strong>，<em>（<strong>抢救过程中有问题，可评论或邮件联系我</strong>）</em></li>
+</ul>
+
+  <p><a class="classtest-link" href="/tags/%E6%8A%A2%E6%95%91%E7%B3%BB%E7%BB%9F/" rel="tag">抢救系统</a>, <a class="classtest-link" href="/tags/%E7%BE%A4%E6%99%96Synology/" rel="tag">群晖Synology</a> — 2019年7月14日</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with 
+        <a href="https://github.com/smalbox" target="_blank">SmalBox</a>
+         and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/smalbox" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

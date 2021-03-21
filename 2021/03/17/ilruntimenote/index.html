@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>ILRuntimeNote</title>
+  
+  <link rel="canonical" href="https://autozcy.gitee.io/2021/03/17/ilruntimenote/">
+  
+  <meta name="description" content="ILRuntime Note简介基本流程 加载 hotfix dll，pdb 到内存流 =&amp;gt; 得到 dll、pdb 内存流 // 假设dll和pdb在“/”路径下 MemoryStream hotfixDll = new MemoryStream(File.ReadAllBytes(&#34;/Hot">
+  
+  
+  <meta name="author" content="SmalBox">
+  
+  <meta property="og:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta property="og:site_name" content="SmalBoxBlog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="ILRuntimeNote" />
+  
+  <meta property="og:description" content="ILRuntime Note简介基本流程 加载 hotfix dll，pdb 到内存流 =&amp;gt; 得到 dll、pdb 内存流 // 假设dll和pdb在“/”路径下 MemoryStream hotfixDll = new MemoryStream(File.ReadAllBytes(&#34;/Hot">
+  
+  <meta property="og:url" content="https://autozcy.gitee.io/2021/03/17/ilruntimenote/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ILRuntimeNote">
+  
+  <meta name="twitter:description" content="ILRuntime Note简介基本流程 加载 hotfix dll，pdb 到内存流 =&amp;gt; 得到 dll、pdb 内存流 // 假设dll和pdb在“/”路径下 MemoryStream hotfixDll = new MemoryStream(File.ReadAllBytes(&#34;/Hot">
+  
+  
+  <meta name="twitter:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta name="twitter:url" content="https://autozcy.gitee.io/2021/03/17/ilruntimenote/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      脑洞杂货铺
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/archives" class="ml">Archives</a>
+          
+        
+        
+          
+            <a href="mailto:smal_box@163.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>ILRuntimeNote</h2>
+
+  <h1 id="ILRuntime-Note"><a href="#ILRuntime-Note" class="headerlink" title="ILRuntime Note"></a>ILRuntime Note</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><ul>
+<li><strong>加载 hotfix dll，pdb 到内存流 =&gt; 得到 dll、pdb 内存流</strong> <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token comment">// 假设dll和pdb在“/”路径下</span>
+<span class="token class-name">MemoryStream</span> hotfixDll <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MemoryStream</span><span class="token punctuation">(</span>File<span class="token punctuation">.</span><span class="token function">ReadAllBytes</span><span class="token punctuation">(</span><span class="token string">"/HotFix.dll"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">MemoryStream</span> hotfixPdb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MemoryStream</span><span class="token punctuation">(</span>File<span class="token punctuation">.</span><span class="token function">ReadAllBytes</span><span class="token punctuation">(</span><span class="token string">"/HotFix.pdb"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><strong>用 dll 和 pdb 来初始化 ILRuntime 的 appdomain =&gt; 得到 appdomain 对象</strong> <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token class-name">AppDomain</span> appDomain <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">AppDomain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+appDomain<span class="token punctuation">.</span><span class="token function">LoadAssembly</span><span class="token punctuation">(</span>hotfixDll<span class="token punctuation">,</span> hotfixPdb<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ILRuntime<span class="token punctuation">.</span>Mono<span class="token punctuation">.</span>Cecil<span class="token punctuation">.</span>Pdb<span class="token punctuation">.</span>PdbReaderProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><strong>用 appdomain 做一些注册 用来优化性能或声明调用</strong></li>
+<li><strong>用 appdomain 来调用各种方法进行操作</strong> <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token comment">// 调用HotFix.dll中HotFix类中PrintLog静态方法，一个参数String。下面的null代表传递的对象实例，静态方法不需要传递，则为null</span>
+appDomain<span class="token punctuation">.</span><span class="token function">Invoke</span><span class="token punctuation">(</span><span class="token string">"HotFix.HotFix"</span><span class="token punctuation">,</span> <span class="token string">"PrintLog"</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">"MyHotFix print"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="预热-热更Code快速上手"><a href="#预热-热更Code快速上手" class="headerlink" title="预热-热更Code快速上手"></a>预热-热更Code快速上手</h2><ul>
+<li><strong>LoadHotfixFile() 加载热更dll</strong></li>
+<li><strong>InitAppDomain() 初始化AppDomain</strong></li>
+</ul>
+<p>   <em>以上两步参考上面 <strong>基本流程</strong> 中代码示例。</em></p>
+<ul>
+<li><strong>InitILRuntime() 注册转换各种要用到的东西</strong></li>
+<li><strong>MainPojCallHotFix() 主工程调用热更dll</strong><ul>
+<li><strong>调用静态方法:</strong><ul>
+<li><strong>调用静态无参数方法</strong></li>
+<li><strong>调用静态一个参数方法</strong></li>
+<li><strong>调用静态两个参数方法</strong></li>
+</ul>
+</li>
+<li><strong>获取类:</strong></li>
+<li><strong>获取方法:</strong><ul>
+<li><strong>获取方法1 - 获取无重载方法</strong></li>
+<li><strong>获取方法2 - 获取有形参重载的方法，创建形参重载的参数列表来获取方法，以区别是那个具体方法</strong></li>
+</ul>
+</li>
+<li><strong>实例化类:</strong><ul>
+<li><strong>实例化类型1 - 无缓存类，直接传递类名实例化</strong></li>
+<li><strong>实例化类型2 - 有缓存类，通过缓存类型实例化</strong></li>
+</ul>
+</li>
+<li><strong>调用实例的成员方法:</strong></li>
+<li><strong>调用泛型方法：</strong></li>
+<li><strong>获取泛型方法：</strong></li>
+<li><strong>注册委托(主工程里声明委托，热更工程里将实例赋值给主工程委托，让主工程完成调用)</strong><ul>
+<li>如果主工程里没有注册相应的委托，并在主工程里调用了热更dll的委托，运行时会提示注册，并且给与相应注册的代码如下，加入到主工程里的注册阶段即可。 <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp">KeyNotFoundException<span class="token punctuation">:</span> Cannot find convertor <span class="token keyword">for</span> <span class="token keyword">global</span><span class="token punctuation">::</span>TestDelegateMethod
+Please <span class="token keyword">add</span> <span class="token class-name">following</span> code<span class="token punctuation">:</span>
+appdomain<span class="token punctuation">.</span>DelegateManager<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">RegisterDelegateConvertor</span><span class="token generic class-name"><span class="token punctuation">&lt;</span><span class="token keyword">global</span><span class="token punctuation">:</span><span class="token punctuation">:</span>TestDelegateMethod<span class="token punctuation">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">(</span>act<span class="token punctuation">)</span> <span class="token operator">=></span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token keyword">global</span><span class="token punctuation">::</span><span class="token function">TestDelegateMethod</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">=></span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">(</span><span class="token punctuation">(</span>Action<span class="token operator">&lt;</span>System<span class="token punctuation">.</span>Int32<span class="token operator">></span><span class="token punctuation">)</span>act<span class="token punctuation">)</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><strong>跨域继承(热更工程中继承主工程里的类，主工程可以调用实现的功能)</strong><ul>
+<li>必须在主工程中注册适配器才能用</li>
+<li><strong>假设主工程中被继承的方法为InfoBase,定义如下</strong> <pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">using UnityEngine;
+namespace SmalBox.Auto
+&#123;
+    public abstract class InfoBase
+    &#123;
+        public virtual int ID &#123; get &#123; return 0; &#125; set &#123; &#125; &#125;
+        public virtual void Info(string str) &#123; Debug.Log(&quot;Info str:&quot; + str); &#125;
+        public abstract void Num(int num);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><strong>注册适配器具体步骤 - 手写Adaptor脚本（假设主工程中被继承的方法为InfoBase）</strong><ul>
+<li>在主工程中添加UIBase的适配器类：<strong>InfoBaseAdapter</strong></li>
+<li>让InfoBaseAdapter继承CrossBindingAdaptor</li>
+<li>IDE中选择实现其三个抽象方法 <strong>BaseCLRType</strong>、<strong>AdaptorType</strong>、<strong>BaseCLRTypes</strong>，IDE会自动把重写框架写好。</li>
+<li>选择UIBaseAdapter重写其方法，生成<strong>CreateCLRInstance</strong>方法。</li>
+<li>生成<strong>Adaptor</strong>方法来写逻辑</li>
+<li><strong>现在可以来写以上提到的生成出的5个必要的方法</strong><ol>
+<li><strong>BaseCLRType</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">&#x2F;&#x2F; 返回主工程中 基类的类型
+public override Type BaseCLRType &#123;get&#123;return typeof(InfoBase);&#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><strong>AdaptorType</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">&#x2F;&#x2F; 返回本类中 Adaptor的类型
+public override Type AdaptorType &#123;get&#123;return typeof(Adaptor);&#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><strong>BaseCLRTypes</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">&#x2F;&#x2F; 只实现一个接口 返回null即可，实现多个参看官网文档
+public override Type[] BaseCLRTypes &#123;get&#123;return null;&#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><strong>CreateCLRInstance</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">&#x2F;&#x2F; 返回用 appdomain和instance 作为参数，调用下面的Adaptor的构造方法，
+public override object CreateCLRInstance(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance) &#123;return new Adaptor(appdomain, instance);&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><strong>Adaptor</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">public class Adapter : SmalBox.Auto.InfoBase, CrossBindingAdaptorType
+&#123;
+   &#x2F;&#x2F; 创建空构造方法、有appdomain、instance参数的构造方法。
+   ILTypeInstance instance;
+   ILRuntime.Runtime.Enviorment.AppDomain appdomain;
+   public Adapter()&#123;&#125;
+   public Adapter(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)
+   &#123;
+       this.appdomain &#x3D; appdomain;
+       this.instance &#x3D; instance;
+   &#125;
+   &#x2F;&#x2F; 返回IL实例
+   public ILTypeInstance ILInstance &#123; get &#123; return instance; &#125; &#125;
+
+   &#x2F;&#x2F; 下面重写基类定义的内容
+
+   &#x2F;&#x2F; 重写ID 属性
+   static CrossBindingFunctionInfo&lt;System.Int32&gt; mget_ID_0 &#x3D; new CrossBindingFunctionInfo&lt;System.Int32&gt;(&quot;get_ID&quot;);
+   static CrossBindingMethodInfo&lt;System.Int32&gt; mset_ID_1 &#x3D; new CrossBindingMethodInfo&lt;System.Int32&gt;(&quot;set_ID&quot;);
+   public override System.Int32 ID
+   &#123;
+      get
+      &#123;
+          if (mget_ID_0.CheckShouldInvokeBase(this.instance))
+              return base.ID;
+          else
+              return mget_ID_0.Invoke(this.instance);
+      &#125;
+      set
+      &#123;
+          if (mset_ID_1.CheckShouldInvokeBase(this.instance))
+              base.ID &#x3D; value;
+          else
+              mset_ID_1.Invoke(this.instance, value);
+      &#125;
+   &#125;
+   &#x2F;&#x2F; 重写Info 虚方法
+   static CrossBindingMethodInfo&lt;System.String&gt; mInfo_2 &#x3D; new CrossBindingMethodInfo&lt;System.String&gt;(&quot;Info&quot;);
+   public override void Info(System.String str)
+   &#123;
+       if (mInfo_2.CheckShouldInvokeBase(this.instance))
+           base.Info(str);
+       else
+           mInfo_2.Invoke(this.instance, str);
+   &#125;
+   &#x2F;&#x2F; 重写Num 抽象方法
+   static CrossBindingMethodInfo&lt;System.Int32&gt; mNum_3 &#x3D; new CrossBindingMethodInfo&lt;System.Int32&gt;(&quot;Num&quot;);
+   public override void Num(System.Int32 num)
+   &#123;
+       mNum_3.Invoke(this.instance, num);
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>注册适配器具体步骤 - 扩展编辑器自动生成Adaptor脚本 （上面手写太麻烦？ILRuntime给出一个编辑器扩展接口可以自动分析基类，生成其Adapter类ヽ(✿ﾟ▽ﾟ)ノ）</strong> <pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">using UnityEditor;
+using SmalBox.Auto;
+public class AutoCrossAdapter
+&#123;
+   [MenuItem(&quot;SmalBox&#x2F;ILRuntime&#x2F;生成跨域继承适配器&quot;)]
+    static void GenerateCrossbindAdapter()
+    &#123;
+        &#x2F;&#x2F;由于跨域继承特殊性太多，自动生成无法实现完全无副作用生成，所以这里提供的代码自动生成主要是给大家生成个初始模版，简化大家的工作
+        &#x2F;&#x2F;大多数情况直接使用自动生成的模版即可，如果遇到问题可以手动去修改生成后的文件，因此这里需要大家自行处理是否覆盖的问题
+        using(System.IO.StreamWriter sw &#x3D; new System.IO.StreamWriter(&quot;Assets&#x2F;MyTest&#x2F;MainObj&#x2F;Adapter&#x2F;InfoBaseAdapter.cs&quot;)) &#x2F;&#x2F; 这里设定要生成到哪里，脚本叫什么名字
+        &#123;
+           &#x2F;&#x2F; 这句用GenerateCrossBindingAdapterCode,传入基类类型、命名空间名字 即可。
+            sw.WriteLine(ILRuntime.Runtime.Enviorment.CrossBindingCodeGenerator.GenerateCrossBindingAdapterCode(typeof(InfoBase), &quot;SmalBox.Auto&quot;));
+        &#125;
+        &#x2F;&#x2F; ...N多基类都写在这。。。
+        &#x2F;&#x2F; 在个编辑器脚本里如上加入所有基类，然后点击菜单上的这个按钮即可自动生成。
+        &#x2F;&#x2F; 自动生成出问题了再按照上面手写的来看看哪里有问题需要修复。
+        AssetDatabase.Refresh();
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="热更Code"><a href="#热更Code" class="headerlink" title="热更Code"></a>热更Code</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <p><a class="classtest-link" href="/tags/Unity-%E7%83%AD%E6%9B%B4%E6%96%B0Code/" rel="tag">Unity - 热更新Code</a> — 2021年3月17日</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with 
+        <a href="https://github.com/smalbox" target="_blank">SmalBox</a>
+         and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/smalbox" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

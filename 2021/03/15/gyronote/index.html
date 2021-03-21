@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>陀螺仪Note</title>
+  
+  <link rel="canonical" href="https://autozcy.gitee.io/2021/03/15/gyronote/">
+  
+  <meta name="description" content="Unity陀螺仪测试记录简介 本篇介绍了 Unity 中提供的陀螺仪接口，在 Android 平台的陀螺仪实际表现。最后介绍以陀螺仪为输入数据的设备环绕查看目标物体的实现方式。  Unity 中的陀螺仪接口 接口使用方式： &amp;#x2F;&amp;#x2F; 从Input中取陀螺仪的类型数据 Gyroscop">
+  
+  
+  <meta name="author" content="SmalBox">
+  
+  <meta property="og:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta property="og:site_name" content="SmalBoxBlog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="陀螺仪Note" />
+  
+  <meta property="og:description" content="Unity陀螺仪测试记录简介 本篇介绍了 Unity 中提供的陀螺仪接口，在 Android 平台的陀螺仪实际表现。最后介绍以陀螺仪为输入数据的设备环绕查看目标物体的实现方式。  Unity 中的陀螺仪接口 接口使用方式： &amp;#x2F;&amp;#x2F; 从Input中取陀螺仪的类型数据 Gyroscop">
+  
+  <meta property="og:url" content="https://autozcy.gitee.io/2021/03/15/gyronote/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="陀螺仪Note">
+  
+  <meta name="twitter:description" content="Unity陀螺仪测试记录简介 本篇介绍了 Unity 中提供的陀螺仪接口，在 Android 平台的陀螺仪实际表现。最后介绍以陀螺仪为输入数据的设备环绕查看目标物体的实现方式。  Unity 中的陀螺仪接口 接口使用方式： &amp;#x2F;&amp;#x2F; 从Input中取陀螺仪的类型数据 Gyroscop">
+  
+  
+  <meta name="twitter:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta name="twitter:url" content="https://autozcy.gitee.io/2021/03/15/gyronote/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      脑洞杂货铺
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/archives" class="ml">Archives</a>
+          
+        
+        
+          
+            <a href="mailto:smal_box@163.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>陀螺仪Note</h2>
+
+  <h1 id="Unity陀螺仪测试记录"><a href="#Unity陀螺仪测试记录" class="headerlink" title="Unity陀螺仪测试记录"></a>Unity陀螺仪测试记录</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>本篇介绍了 Unity 中提供的陀螺仪接口，在 Android 平台的陀螺仪实际表现。最后介绍以陀螺仪为输入数据的设备环绕查看目标物体的实现方式。</li>
+</ul>
+<h2 id="Unity-中的陀螺仪接口"><a href="#Unity-中的陀螺仪接口" class="headerlink" title="Unity 中的陀螺仪接口"></a>Unity 中的陀螺仪接口</h2><ul>
+<li><strong>接口使用方式：</strong> <pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">&#x2F;&#x2F; 从Input中取陀螺仪的类型数据
+Gyroscope gyro &#x3D; Input.gyro;
+&#x2F;&#x2F; 用gyro的各种属性设置或者获取参数来使用陀螺仪
+&#x2F;&#x2F; 例如：
+gyro.enabled &#x3D; true; &#x2F;&#x2F; 开启陀螺仪
+var currGyroAngle &#x3D; gyro.attitude.eulerAngles; &#x2F;&#x2F; 获取当前陀螺仪旋转到了的角度<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><strong>以下是陀螺仪的所有属性参数：</strong><table>
+<thead>
+<tr>
+<th align="center">（类型）属性</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">(Quaternion) <strong>attitude</strong></td>
+<td align="center">返回设备的姿态（即空间方向）。<em>（实测每次开启应用程序后的空间方向零点的坐标不一致。旋转设备方向会改变轴向。）</em></td>
+</tr>
+<tr>
+<td align="center">(bool) <strong>enabled</strong></td>
+<td align="center">设置或获取此陀螺仪的启用状态。<em>（使用陀螺仪时要代码设置打开此属性）</em></td>
+</tr>
+<tr>
+<td align="center">(Vector3) <strong>gravity</strong></td>
+<td align="center">返回以设备的参考框架表示的重力加速度矢量。<em>（可以用来简单检测设备的当前姿态。旋转设备会改变轴向。）</em></td>
+</tr>
+<tr>
+<td align="center">(Vector3) <strong>rotationRate</strong></td>
+<td align="center">返回由设备的陀螺仪测量的旋转速率。<em>（获取设备的旋转偏移量，由于精度问题，真实旋转的角度可能不能严格和获取的数据对应。）</em></td>
+</tr>
+<tr>
+<td align="center">(Vector3) <strong>rotationRateUnbiased</strong></td>
+<td align="center">返回由设备的陀螺仪测量的无偏转速。<em>（相对rotationRate数据更稳定建议使用）</em></td>
+</tr>
+<tr>
+<td align="center">(float) <strong>updateInterval</strong></td>
+<td align="center">设置或获取陀螺仪间隔（以秒为单位）。 <em>（设置获取设备间隔，控制陀螺仪灵敏度。）</em></td>
+</tr>
+<tr>
+<td align="center">(Vector3) <strong>userAcceleration</strong></td>
+<td align="center">返回用户给予设备的加速度。 <em>（可以获取各个轴向的加速度，精度一般。）</em></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="设备轴向"><a href="#设备轴向" class="headerlink" title="设备轴向"></a>设备轴向</h2><ul>
+<li><strong>设备轴向</strong>（Portrait,PortraitUpsideDown,LandscapeLeft,LandscapeRight）以Portrait作为标准方向坐标如下，其他方向是在此基础上做左右旋转得到。<em>不管设备如何朝向，轴向是不会改变的</em></li>
+<li><strong>Portrait 设备竖直正方向</strong><ul>
+<li>设备状态：<ul>
+<li>┏++┓</li>
+<li>┃⇧y┃ 设备向上Y轴</li>
+<li>┗==┛</li>
+<li>┏++┓</li>
+<li>┃⇨x┃ 设备向右X轴</li>
+<li>┗==┛</li>
+<li>┏++┓</li>
+<li>┃◉z┃ 设备向上Z轴</li>
+<li>┗==┛</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>PortraitUpsideDown 设备竖直倒方向</strong><ul>
+<li>Portrait 绕z轴旋转180°</li>
+</ul>
+</li>
+<li><strong>LandscapeLeft 设备左转方向</strong><ul>
+<li>Portrait 绕z轴逆时针90°</li>
+</ul>
+</li>
+<li><strong>LandscapeRight 设备右转方向</strong><ul>
+<li>Portrait 绕z轴顺时针90°</li>
+</ul>
+</li>
+</ul>
+<h2 id="Android-平台"><a href="#Android-平台" class="headerlink" title="Android 平台"></a>Android 平台</h2><ul>
+<li><strong>gyro.attitude.eulerAngles 陀螺仪状态角，的值始终与内容方向一致。</strong><ul>
+<li><strong>具体解释</strong><ul>
+<li>假设设备屏幕朝上放在桌子上，设备内容与现实世界北方方向相同。</li>
+<li> N</li>
+<li>┏++┓</li>
+<li>┃⇧⇧┃</li>
+<li>┗==┛  Portrait, gyro.attitude.eulerAngles = 0°</li>
+<li> S</li>
+<li>当设备方向从Portrait变成PortraitUpsideDown时，设备内容会变化朝向南方，陀螺仪状态角也会与原来相差180°。</li>
+<li> N</li>
+<li>┏==┓</li>
+<li>┃⇩⇩┃</li>
+<li>┗++┛  <em>PortraitUpsideDown</em>, gyro.attitude.eulerAngles = <em>180°</em></li>
+<li> S</li>
+<li>这时要将内容方向与现实世界对齐，要旋转设备180°，让内容与现实世界对齐。陀螺仪角度也会随之归位到开始时的角度。</li>
+<li> N</li>
+<li>┏++┓</li>
+<li>┃⇧⇧┃</li>
+<li>┗==┛  <em>PortraitUpsideDown</em>, gyro.attitude.eulerAngles = <em>0°</em></li>
+<li> S</li>
+<li>变化的是设备的方向被旋转了、设备的朝向模式装变成了PortraitUpsideDown。</li>
+<li><strong>总结</strong><ul>
+<li><strong>陀螺仪状态角</strong> 与 <strong>内容朝向</strong> 相对应。不管设备轴向怎么变化，他们的对应关系不会变。</li>
+<li>设备轴向变化时，可以让旋转设备与轴向变化前相同即可实现，将内容朝向恢复到轴变化前的朝向姿态。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="借助陀螺仪实现设备环绕查看物体功能"><a href="#借助陀螺仪实现设备环绕查看物体功能" class="headerlink" title="借助陀螺仪实现设备环绕查看物体功能"></a>借助陀螺仪实现设备环绕查看物体功能</h2><ul>
+<li><strong>利用陀螺仪状态角,可完成精准的360°环绕查看(旋转移动相机)</strong> <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">UnityEngine</span><span class="token punctuation">;</span>
+<span class="token comment">// 脚本挂载到相机上</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SurroundView</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">MonoBehaviour</span></span>
+<span class="token punctuation">&#123;</span>
+   <span class="token keyword">public</span> <span class="token class-name">GameObject</span> targetObj<span class="token punctuation">;</span>
+   <span class="token keyword">private</span> <span class="token class-name">Gyroscope</span> gyro<span class="token punctuation">;</span>
+   <span class="token keyword">private</span> <span class="token class-name"><span class="token keyword">float</span></span> distance<span class="token punctuation">;</span>
+   <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token punctuation">&#123;</span>
+      gyro <span class="token operator">=</span> Input<span class="token punctuation">.</span>gyro<span class="token punctuation">;</span>
+      gyro<span class="token punctuation">.</span>enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      distance <span class="token operator">=</span> Vector3<span class="token punctuation">.</span><span class="token function">Distance</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> targetObj<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token punctuation">&#123;</span>
+      transform<span class="token punctuation">.</span><span class="token function">LookAt</span><span class="token punctuation">(</span>targetObj<span class="token punctuation">.</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token class-name"><span class="token keyword">var</span></span> targetPos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Vector3</span><span class="token punctuation">(</span>
+        <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>Math<span class="token punctuation">.</span><span class="token function">Sin</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>Math<span class="token punctuation">.</span>PI <span class="token operator">*</span> gyro<span class="token punctuation">.</span>attitude<span class="token punctuation">.</span>eulerAngles<span class="token punctuation">.</span>x <span class="token operator">/</span> <span class="token number">180</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> distance<span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>Math<span class="token punctuation">.</span><span class="token function">Cos</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>Math<span class="token punctuation">.</span>PI <span class="token operator">*</span> gyro<span class="token punctuation">.</span>attitude<span class="token punctuation">.</span>eulerAngles<span class="token punctuation">.</span>y <span class="token operator">/</span> <span class="token number">180</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> distance<span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>Math<span class="token punctuation">.</span><span class="token function">Sin</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>Math<span class="token punctuation">.</span>PI <span class="token operator">*</span> gyro<span class="token punctuation">.</span>attitude<span class="token punctuation">.</span>eulerAngles<span class="token punctuation">.</span>y <span class="token operator">/</span> <span class="token number">180</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> distance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      transform<span class="token punctuation">.</span>position <span class="token operator">=</span> Vector3<span class="token punctuation">.</span><span class="token function">Lerp</span><span class="token punctuation">(</span>transform<span class="token punctuation">.</span>position<span class="token punctuation">,</span> targetPos<span class="token punctuation">,</span> Time<span class="token punctuation">.</span>deltaTime <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>脚本要点解析：</strong><ul>
+<li><strong>targetPos值的确定:</strong>(设:相机到目标物体距离为a，)<ul>
+<li>GyroX角控制水平环绕，GyroX角只控制XPos，所以单独用GyroX计算。<ul>
+<li><strong>x = sin(GyroX)a</strong></li>
+</ul>
+</li>
+<li>GyroY角控制垂直环绕，GyroY角控制YPos、ZPos，所用这两个的值在一个平面一个角算。<ul>
+<li><strong>y = cos(GyroY)a</strong></li>
+<li><strong>z = sin(GyroY)a</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>利用陀螺仪旋转速度向量，可完成精度较低的环绕查看(旋转模型)</strong> <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">UnityEngine</span><span class="token punctuation">;</span>
+<span class="token comment">// 挂载到被控制的物体上</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GyroObj</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">MonoBehaviour</span></span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name"><span class="token keyword">float</span></span> speed <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 调节旋转速度</span>
+    <span class="token keyword">private</span> <span class="token class-name">Gyroscope</span> gyro<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        gyro <span class="token operator">=</span> Input<span class="token punctuation">.</span>gyro<span class="token punctuation">;</span>
+        gyro<span class="token punctuation">.</span>enabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        gameObject<span class="token punctuation">.</span>transform<span class="token punctuation">.</span><span class="token function">Rotate</span><span class="token punctuation">(</span>gyro<span class="token punctuation">.</span>rotationRate <span class="token operator">*</span> speed<span class="token punctuation">,</span> Space<span class="token punctuation">.</span>World<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+
+  <p><a class="classtest-link" href="/tags/%E9%99%80%E8%9E%BA%E4%BB%AA/" rel="tag">陀螺仪</a> — 2021年3月15日</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with 
+        <a href="https://github.com/smalbox" target="_blank">SmalBox</a>
+         and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/smalbox" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

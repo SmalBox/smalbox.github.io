@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>视频编码与封装</title>
+  
+  <link rel="canonical" href="https://autozcy.gitee.io/2018/10/28/shi-pin-bian-ma-yu-feng-zhuang/">
+  
+  <meta name="description" content="视频编码与封装前言  通常所说的视频格式，其实是视频文件的封装格式，而为什么在 final cut pro 中就能流畅的剪辑影片，同样的或者硬件配置更强大的pc机上往往就没有那么流畅的预览影片呢。   这除了apple在系统层面做了优化，还有最为重要的就是视频的编码格式。   来了解视频文件的构成从">
+  
+  
+  <meta name="author" content="SmalBox">
+  
+  <meta property="og:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta property="og:site_name" content="SmalBoxBlog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="视频编码与封装" />
+  
+  <meta property="og:description" content="视频编码与封装前言  通常所说的视频格式，其实是视频文件的封装格式，而为什么在 final cut pro 中就能流畅的剪辑影片，同样的或者硬件配置更强大的pc机上往往就没有那么流畅的预览影片呢。   这除了apple在系统层面做了优化，还有最为重要的就是视频的编码格式。   来了解视频文件的构成从">
+  
+  <meta property="og:url" content="https://autozcy.gitee.io/2018/10/28/shi-pin-bian-ma-yu-feng-zhuang/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="视频编码与封装">
+  
+  <meta name="twitter:description" content="视频编码与封装前言  通常所说的视频格式，其实是视频文件的封装格式，而为什么在 final cut pro 中就能流畅的剪辑影片，同样的或者硬件配置更强大的pc机上往往就没有那么流畅的预览影片呢。   这除了apple在系统层面做了优化，还有最为重要的就是视频的编码格式。   来了解视频文件的构成从">
+  
+  
+  <meta name="twitter:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta name="twitter:url" content="https://autozcy.gitee.io/2018/10/28/shi-pin-bian-ma-yu-feng-zhuang/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      脑洞杂货铺
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/archives" class="ml">Archives</a>
+          
+        
+        
+          
+            <a href="mailto:smal_box@163.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>视频编码与封装</h2>
+
+  <h1 id="视频编码与封装"><a href="#视频编码与封装" class="headerlink" title="视频编码与封装"></a>视频编码与封装</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  通常所说的<strong>视频格式</strong>，其实是视频文件的<strong>封装格式</strong>，而为什么在 final cut pro 中就能流畅的剪辑影片，同样的或者硬件配置更强大的pc机上往往就没有那么流畅的预览影片呢。</p>
+<p>  这除了apple在系统层面做了优化，还有最为重要的就是<strong>视频的编码格式</strong>。</p>
+<p>  来了解视频文件的构成从而让视频剪辑更为流畅。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><ul>
+<li>视频文件的构成</li>
+<li>不可忽视的音频</li>
+<li>视频编码方式</li>
+<li>视频编码格式</li>
+<li>视频封装格式</li>
+<li>视频播放的码率</li>
+<li>高效的剪辑工作流（最终目标）</li>
+</ul>
+<h2 id="视频文件的构成"><a href="#视频文件的构成" class="headerlink" title="视频文件的构成"></a><strong>视频文件的构成</strong></h2><p>要了解视频的编码前，需要先了解一下视频文件中到底包含了什么。</p>
+<ol>
+<li>视频中的<strong>图像</strong></li>
+<li>对应的<strong>音频</strong></li>
+<li>一些媒体信息<ul>
+<li><strong>帧率</strong>（例如：H.264）</li>
+<li><strong>码率</strong>（例如：25fps） </li>
+<li><strong>字幕文件</strong></li>
+<li><strong>拍摄机器等信息</strong></li>
+</ul>
+</li>
+<li><strong>封装格式</strong>（例如；mov、mp4、mkv、ogg）</li>
+</ol>
+<h2 id="不可忽视的音频"><a href="#不可忽视的音频" class="headerlink" title="不可忽视的音频"></a><strong>不可忽视的音频</strong></h2><p>视频中的音频相对图像来说简单一些，但是他的作用是不可忽视的，好的音质能让视频观感大幅提升（例如：国内的恐怖片如果没了音频基本上就是个闹剧了）。好的音频节奏和图像的配合才是好的视频。</p>
+<p>音频主要上还是两种</p>
+<ol>
+<li><strong>有损音频</strong><ul>
+<li>常用格式有 mp3、acc</li>
+</ul>
+</li>
+<li><strong>无损音频</strong><ul>
+<li>常用格式欧 wav、aiff</li>
+</ul>
+</li>
+</ol>
+<p><em>在网络上常规的音频设置为：48khz/192kbps</em></p>
+<h2 id="视频编码的方式"><a href="#视频编码的方式" class="headerlink" title="视频编码的方式"></a><strong>视频编码的方式</strong></h2><p><strong>这部分就是重点了！！！</strong></p>
+<p>前言部分讲述的让视频剪辑更为流畅的核心就在于此了。</p>
+<p>一个视频文件是通过不同的图像编码方式将其图像编码，再加上他的音频，字幕文件，拍摄机器等其他信息组建完成，最后通过不同的封装格式呈现给大家。</p>
+<p>大家看到的不同的视频文件比如mp4，mov都是封装格式，而决定能否流畅的是其中的编码格式。</p>
+<p>编码方式分两种：</p>
+<ol>
+<li><strong>帧内编码（运算少，文件大）</strong></li>
+<li><strong>帧间编码（运算多，文件小）</strong></li>
+</ol>
+<ul>
+<li><p><strong>帧内编码</strong></p>
+<ul>
+<li>帧内编码是将<strong>每一帧的画面进行压缩</strong>，然后组成的视频。所以采用帧内编码格式的视频在剪辑的预览中，肯定是更加流畅。带来的副作用是由于每一帧都在所以视频文件就会比较大，这也就是为什么在视频编辑的时候为什么要大内存大原因了。</li>
+<li>了解了帧内编码的特性，不难看出，帧内编码更适合在<strong>剪辑的时候使用</strong>，能加快剪辑时预览的速度（也就是所谓的不卡）。</li>
+</ul>
+</li>
+<li><p><strong>帧间编码</strong></p>
+<ul>
+<li><p>帧间编码是保留一部分帧，<strong>空缺下来的帧通过在播放时解码器的运算来生成</strong>。这样做的后果就是预览时会增大处理的负荷，在剪辑中最直接的表现就是需要耐心的等待渲染才能预览。好处就是指存储了一部分的帧，能有效的减小视频文件的大小。</p>
+</li>
+<li><p>帧间编码格式的最大优点就是<strong>文件小</strong>，所以最适合在视频编辑完成后的生成导出。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="编码格式"><a href="#编码格式" class="headerlink" title="编码格式"></a><strong>编码格式</strong></h2><p>了解了编码方式就能够看出，想要高效的<strong>剪辑</strong>就需要<strong>帧内编码</strong>，想要<strong>视频传播</strong>则需要<strong>帧间编码</strong>。</p>
+<p>常用的编码格式：</p>
+<table>
+<thead>
+<tr>
+<th align="center">编码格式</th>
+<th align="center">编码方式</th>
+<th align="center">特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">h.264(mpeg4)</td>
+<td align="center">帧间编码</td>
+<td align="center">网络传播最佳</td>
+</tr>
+<tr>
+<td align="center">mpeg2(dvd)</td>
+<td align="center">帧间编码</td>
+<td align="center">过时</td>
+</tr>
+<tr>
+<td align="center">h.265(hevc)</td>
+<td align="center">帧间编码</td>
+<td align="center">未普及</td>
+</tr>
+<tr>
+<td align="center">proes(apple)</td>
+<td align="center">帧内编码</td>
+<td align="center">高效&amp;优良</td>
+</tr>
+<tr>
+<td align="center">dhxhd/hr(avid)</td>
+<td align="center">帧内编码</td>
+<td align="center">win支持最佳</td>
+</tr>
+<tr>
+<td align="center">cineform(gropro)</td>
+<td align="center">帧内编码</td>
+<td align="center">最佳</td>
+</tr>
+</tbody></table>
+<h2 id="封装格式"><a href="#封装格式" class="headerlink" title="封装格式"></a><strong>封装格式</strong></h2><p>封装格式是最常说的，他就在文件的<strong>尾缀</strong>上。</p>
+<p>常用的封装格式有：</p>
+<p>|封装格式|对编码的支持|<br>|:-:|:-:|:-:|<br>|Mov（apple）| 优良 |<br>|mp4（动态图像专家组）|  最佳 |<br>|mkv/ogg（开源）| 软件支持不足 |<br>|wmv（Microsoft）| 兼容性低下 |<br>|AVCHD（松下/索尼）| 结构复杂（通过文件的方式组织）|<br>|avi | 旧，不支持新编码 |</p>
+<h2 id="播放码率"><a href="#播放码率" class="headerlink" title="播放码率"></a><strong>播放码率</strong></h2><p>码率通常以秒为时间单位，一秒内包含的数据就是码率能够提供的信息。</p>
+<p>理论上分辨率越高的视频就会越清晰。但是当视频分辨率越高，但是码率比较低的时候，低分辨率的视频则会显示的更加清晰。因为低码率带来的信息量比较低，高分辨率的视频的每一帧相较于低分辨率的视频会更加模糊，所以会显得低分辨率的画质会更好一些。</p>
+<p>当然了，这种现象会随着码率的提高，低分辨率低视频在达到它清晰的极限时，高分辨率的视频画质就会超越低分辨率低视频。</p>
+<p>视频码率通常的单位为 <strong>mbps</strong>（Million bits per second），<strong>MBs</strong>。</p>
+<p>音频码率通常为<strong>kbps</strong>。</p>
+<p>换算单位是：</p>
+<ul>
+<li>8bits = 1byte</li>
+<li>1mbps = 0.125bit/s</li>
+</ul>
+<h2 id="高效的剪辑工作流（最终目标）"><a href="#高效的剪辑工作流（最终目标）" class="headerlink" title="高效的剪辑工作流（最终目标）"></a><strong>高效的剪辑工作流（最终目标）</strong></h2><p>经过以上的对比分析，最佳的<strong>视频剪辑方式</strong>是用<strong>mov</strong>格式的视频素材进行<strong>剪辑调色</strong>等工作，而最后<strong>成片</strong>导出为<strong>mp4</strong>格式放到网络上。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">剪辑/调色</th>
+<th align="center">网络传输</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">编码方式</td>
+<td align="center">帧内编码</td>
+<td align="center">帧间编码</td>
+</tr>
+<tr>
+<td align="center">编码格式</td>
+<td align="center">prores/cineform</td>
+<td align="center">H.264</td>
+</tr>
+<tr>
+<td align="center">封装格式</td>
+<td align="center">mov</td>
+<td align="center">mp4</td>
+</tr>
+</tbody></table>
+<p>知道了视频的编码与封装就不用纠结是mac还是win的问题了，只要<strong>选对了编码</strong>那编辑起来都是行云流水的。<em>（另外adobe的encoder真的很厉害）</em></p>
+<p><em>有任何关于本文内容的问题，可以在下方评论，或者邮件联系联系我。</em></p>
+
+  <p><a class="classtest-link" href="/tags/%E8%A7%86%E9%A2%91%E5%B0%81%E8%A3%85/" rel="tag">视频封装</a>, <a class="classtest-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81/" rel="tag">视频编码</a> — 2018年10月28日</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with 
+        <a href="https://github.com/smalbox" target="_blank">SmalBox</a>
+         and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/smalbox" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>
