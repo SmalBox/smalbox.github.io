@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>Unity热更及AB包切分分享笔记</title>
+  
+  <link rel="canonical" href="https://autozcy.gitee.io/2021/06/27/unity-re-geng-ji-ab-bao-qie-fen-fen-xiang-bi-ji/">
+  
+  <meta name="description" content="Unity热更及AB包切分分享笔记本文主要整理了在分享时的关键点。分享主要包括两个方面：1.热更时的各个方面注意点。2.AB包切分时改怎么规划组织切分打包AB包。 更新机制 先看思路图： 更新流程提审   这里涉及到在不同渠道同时更新时，每个平台审核进度不一，会影响更新包的更新进度。版本号包版本号 ">
+  
+  
+  <meta name="author" content="SmalBox">
+  
+  <meta property="og:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta property="og:site_name" content="SmalBoxBlog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Unity热更及AB包切分分享笔记" />
+  
+  <meta property="og:description" content="Unity热更及AB包切分分享笔记本文主要整理了在分享时的关键点。分享主要包括两个方面：1.热更时的各个方面注意点。2.AB包切分时改怎么规划组织切分打包AB包。 更新机制 先看思路图： 更新流程提审   这里涉及到在不同渠道同时更新时，每个平台审核进度不一，会影响更新包的更新进度。版本号包版本号 ">
+  
+  <meta property="og:url" content="https://autozcy.gitee.io/2021/06/27/unity-re-geng-ji-ab-bao-qie-fen-fen-xiang-bi-ji/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Unity热更及AB包切分分享笔记">
+  
+  <meta name="twitter:description" content="Unity热更及AB包切分分享笔记本文主要整理了在分享时的关键点。分享主要包括两个方面：1.热更时的各个方面注意点。2.AB包切分时改怎么规划组织切分打包AB包。 更新机制 先看思路图： 更新流程提审   这里涉及到在不同渠道同时更新时，每个平台审核进度不一，会影响更新包的更新进度。版本号包版本号 ">
+  
+  
+  <meta name="twitter:image" content="https://autozcy.gitee.ioundefined">
+  
+  <meta name="twitter:url" content="https://autozcy.gitee.io/2021/06/27/unity-re-geng-ji-ab-bao-qie-fen-fen-xiang-bi-ji/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="six columns ml-1">
+    <h1 class="mt-2">
+      脑洞杂货铺
+    </h1>
+  </div>
+
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns left">
+        <a href="/">Home</a>
+        
+          
+          <a href="/archives" class="ml">Archives</a>
+          
+        
+        
+          
+            <a href="mailto:smal_box@163.com" target="_blank" class="ml">Email</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+</div>
+
+        <div class="trans">
+            <h2>Unity热更及AB包切分分享笔记</h2>
+
+  <h1 id="Unity热更及AB包切分分享笔记"><a href="#Unity热更及AB包切分分享笔记" class="headerlink" title="Unity热更及AB包切分分享笔记"></a>Unity热更及AB包切分分享笔记</h1><p>本文主要整理了在分享时的关键点。分享主要包括两个方面：1.热更时的各个方面注意点。2.AB包切分时改怎么规划组织切分打包AB包。</p>
+<h2 id="更新机制"><a href="#更新机制" class="headerlink" title="更新机制"></a>更新机制</h2><ul>
+<li>先看思路图：<ul>
+<li><img src="/2021/06/27/unity-re-geng-ji-ab-bao-qie-fen-fen-xiang-bi-ji/%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6.png" alt="更新机制脑图"><h3 id="更新流程"><a href="#更新流程" class="headerlink" title="更新流程"></a>更新流程</h3><h4 id="提审"><a href="#提审" class="headerlink" title="提审"></a>提审</h4></li>
+</ul>
+</li>
+<li>这里涉及到在不同渠道同时更新时，每个平台审核进度不一，会影响更新包的更新进度。<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><h4 id="包版本号"><a href="#包版本号" class="headerlink" title="包版本号"></a>包版本号</h4></li>
+<li>一般是两位，例如1.9<h4 id="代码版本号"><a href="#代码版本号" class="headerlink" title="代码版本号"></a>代码版本号</h4></li>
+<li>首先的问题，为什么要热更代码，最现实的问题就是成本问题，每一次重装的大更后台数据显示会有10%左右的人数掉落。相对于现阶段的获客成本来说是相当大的损失。</li>
+<li>代码版本号一般为3位，例如1.9.1</li>
+<li>包版本补丁和资源版本，都以代码版本为标准进行更新。<h4 id="资源版本号"><a href="#资源版本号" class="headerlink" title="资源版本号"></a>资源版本号</h4></li>
+<li>一般是3位，主要跟随代码版本号和活动进行更新。</li>
+</ul>
+<h2 id="AB包分类"><a href="#AB包分类" class="headerlink" title="AB包分类"></a>AB包分类</h2><ul>
+<li>同样先看图：<ul>
+<li><img src="/2021/06/27/unity-re-geng-ji-ab-bao-qie-fen-fen-xiang-bi-ji/AB%E5%8C%85%E5%88%86%E7%B1%BB.png" alt="AB包分类"><h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3></li>
+</ul>
+</li>
+<li>每个字体一个AB包。<h3 id="图集"><a href="#图集" class="headerlink" title="图集"></a>图集</h3></li>
+<li>一个图集一个AB包。<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3></li>
+<li>场景相对有些复杂</li>
+<li>场景包括很多资源，比如Shader、模型、图片等</li>
+<li>一般来讲一个场景一个AB包，逻辑如下：<ul>
+<li><img src="/2021/06/27/unity-re-geng-ji-ab-bao-qie-fen-fen-xiang-bi-ji/%E5%9C%BA%E6%99%AF%E5%88%86%E5%8C%85%E9%80%BB%E8%BE%91%E5%9B%BE.png" alt="场景分包逻辑图"></li>
+</ul>
+</li>
+<li>其中Shader作为基础。</li>
+<li>上一层的SceneCommen是通过工具在各个场景中找出的公用资源计算出来的。</li>
+<li>再往上按照大场景的公共资源提取出来。</li>
+<li>最后再每个小场景进行单独打AB包。<h3 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a>Shader</h3></li>
+<li>两种策略<ol>
+<li>当所涉及到的shader没有很多时，所有shader打一个AB包即可。</li>
+<li>当shader比较大，能有几十m的时候就要考虑分版本增量打包。<h3 id="特效"><a href="#特效" class="headerlink" title="特效"></a>特效</h3></li>
+</ol>
+</li>
+<li>所有特效一个AB包。</li>
+<li>其中包括 UI、Scene、Model 的特效都打成一个AB包，加载后常驻内存，可快速调用。<h3 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h3></li>
+<li>按照美术规划目录打AB包。<h3 id="Animator"><a href="#Animator" class="headerlink" title="Animator"></a>Animator</h3></li>
+<li>一个Animator一个AB包。<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3></li>
+<li>动画一般跟着模型走，单独动画一个state一个AB包。</li>
+<li>动画很占用内存，必要时要压缩Anim<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3></li>
+<li>一个模型一个AB包。</li>
+</ul>
+<h2 id="内存相关"><a href="#内存相关" class="headerlink" title="内存相关"></a>内存相关</h2><ul>
+<li>资源池<ul>
+<li>每个加载的资源会给其一个计数器，当计数器为0时压入资源池。当资源池达到给定的上限时，会指定最老的资源对其释放。</li>
+<li>一般来讲资源的释放会在新资源加载时进行。</li>
+<li>在切换场景时会释放所有池中资源。只保留跨场景不清除的数据。</li>
+</ul>
+</li>
+<li>如何正确释放资源<ul>
+<li>不要使用Unity的Resources.UnloadUnusedAssets这个方法来图省事清理内存。这会让引擎线搜索所有资源然后再释放，会导致释放过程有明显卡顿。</li>
+<li>适当使用System.GC.Collect来进行回收堆中内存。</li>
+</ul>
+</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>多人网络游戏同步机制<ul>
+<li>帧同步<ul>
+<li>一般用在人数少、操作较为固定、强击打类游戏中使用。</li>
+</ul>
+</li>
+<li>状态同步<ul>
+<li>在人数较多时会使用状态同步，记录每个发生的状态，并且在服务器中做核验计算。</li>
+<li>必要时在服务器端会做“延迟补偿”来对比收到的数据的前N秒的所有状态数据对比是否发生响应事件。</li>
+<li>对于游戏中的回放功能，状态同步是将状态数据重放来实现回放功能，而不是去真的录制正常游戏。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>移动端游对服务器的需求<ul>
+<li>“大逃杀类”游戏在性能测试时得到平均56核处理器能保证同时80场游戏运行。</li>
+<li>“Dota类”游戏1个核心能同时处理16场游戏的计算。</li>
+</ul>
+</li>
+<li>热更方面，Android目前可以做到IL2CPP全热更，具体可以参考<a target="_blank" rel="noopener" href="https://github.com/noodle1983/UnityAndroidIl2cppPatchDemo">这个库</a></li>
+<li>IOS目前官方肯定是要禁止所有热更，以防止有利用其绕过审核植入不明程序威胁生态安全。但是具体市面用的方案比如Lua可不可行，还是看apple官方的态度，想禁止是很容易的。案例可参照jsPath，这里不细说，有兴趣自行查阅。</li>
+<li>程序设计时，所有功能设计要以 <strong>运行时优先</strong>，这样才能保证在每个功能合并时让整体处于较优状态。繁琐的事情可以写编辑器工具和自动化批处理来简化制作流程上的繁琐。</li>
+<li>VFS(virtual File System 虚拟文件系统) 在处理工程资源相关时，可以建立一个VFS来统一封装资源的管理，对资源的加载卸载缓冲的使用封装起来为工程提供方便的使用接口。</li>
+</ul>
+
+  <p> — 2021年6月27日</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with 
+        <a href="https://github.com/smalbox" target="_blank">SmalBox</a>
+         and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/smalbox" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+
+      
+
+      
+
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

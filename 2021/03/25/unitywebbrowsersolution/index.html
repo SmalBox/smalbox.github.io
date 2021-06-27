@@ -11,34 +11,34 @@
   <meta charset="utf-8">
 
   
-  <title>SmalBoxBlog</title>
+  <title>UnityWebBrowserSolution</title>
   
-  <link rel="canonical" href="https://autozcy.gitee.io/page/3/">
+  <link rel="canonical" href="https://autozcy.gitee.io/2021/03/25/unitywebbrowsersolution/">
   
-  <meta name="description" content="">
+  <meta name="description" content="Unity 中使用 Web 游览器 解决方案简介 收集在Unity中嵌如Web的解决方案。 UnityWebCore： 只支持Windows平台，调用浏览器内核，将网页渲染到mesh，作为gameObject。 WWebView： 只支持Windows ZFBrowser： 适用于Windows、M">
   
   
   <meta name="author" content="SmalBox">
   
-  <meta property="og:image" content="https://autozcy.gitee.io/images/favicon.png">
+  <meta property="og:image" content="https://autozcy.gitee.ioundefined">
   
   <meta property="og:site_name" content="SmalBoxBlog" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="SmalBoxBlog" />
+  <meta property="og:title" content="UnityWebBrowserSolution" />
   
-  <meta property="og:description" content="">
+  <meta property="og:description" content="Unity 中使用 Web 游览器 解决方案简介 收集在Unity中嵌如Web的解决方案。 UnityWebCore： 只支持Windows平台，调用浏览器内核，将网页渲染到mesh，作为gameObject。 WWebView： 只支持Windows ZFBrowser： 适用于Windows、M">
   
-  <meta property="og:url" content="https://autozcy.gitee.io/page/3/" />
+  <meta property="og:url" content="https://autozcy.gitee.io/2021/03/25/unitywebbrowsersolution/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SmalBoxBlog">
+  <meta name="twitter:title" content="UnityWebBrowserSolution">
   
-  <meta name="twitter:description" content="">
+  <meta name="twitter:description" content="Unity 中使用 Web 游览器 解决方案简介 收集在Unity中嵌如Web的解决方案。 UnityWebCore： 只支持Windows平台，调用浏览器内核，将网页渲染到mesh，作为gameObject。 WWebView： 只支持Windows ZFBrowser： 适用于Windows、M">
   
   
-  <meta name="twitter:image" content="https://autozcy.gitee.io/images/favicon.png">
+  <meta name="twitter:image" content="https://autozcy.gitee.ioundefined">
   
-  <meta name="twitter:url" content="https://autozcy.gitee.io/page/3/" />
+  <meta name="twitter:url" content="https://autozcy.gitee.io/2021/03/25/unitywebbrowsersolution/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -185,104 +185,42 @@
 </div>
 
         <div class="trans">
-          <div class="row">
-  <div class="column">
-    <!-- Main information, edit it on theme/_config.yml -->
-    <h2 class="mb-2">I am SmalBox &lt;(._. )&gt;</h2>
-    <p>A Designer and Unity developer from ShangHai</p>
-    <p>生命不息，折腾不止。</p>
-  </div>
-</div>
+            <h2>UnityWebBrowserSolution</h2>
 
-<h3>Recent Posts</h3>
+  <h1 id="Unity-中使用-Web-游览器-解决方案"><a href="#Unity-中使用-Web-游览器-解决方案" class="headerlink" title="Unity 中使用 Web 游览器 解决方案"></a>Unity 中使用 Web 游览器 解决方案</h1><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>收集在Unity中嵌如Web的解决方案。</li>
+<li><strong>UnityWebCore：</strong> 只支持Windows平台，调用浏览器内核，将网页渲染到mesh，作为gameObject。</li>
+<li><strong>WWebView：</strong> 只支持Windows</li>
+<li><strong>ZFBrowser：</strong> 适用于Windows、MacOS。(web内容以raw纹理方式显示。web页作为物体存在于场景中。)</li>
+<li><strong>Unity-Webview：</strong> 适用于Android, iOS, Unity Web Player, and Mac (Windows 现在还不支持(包括Editor模式)).，调用移动平台的Webview。(通过调用对应平台的web引擎显示网页。导致网页显示在屏幕最上端，会遮盖住一切unity的物体。可以在mac editor中调试，并且能在unity的game窗口内部正常显示。)</li>
+<li><strong><a target="_blank" rel="noopener" href="https://docs.uniwebview.com/">UniWebView：</a></strong> 适用于Andriod、ios和Mac os，在移动端效果最好。2.0版本之后支持WP8，不支持windows桌面系统，包括编辑器状态。(原理同Unity-Webview，后续支持和官网api资料比较好。缺点是在mac editor调试时web页是从unity game窗口脱离出来的，运行时的整体性差了些。)</li>
+<li><strong>……</strong></li>
+</ul>
+<h2 id="先上对比结论"><a href="#先上对比结论" class="headerlink" title="先上对比结论"></a>先上对比结论</h2><ul>
+<li><strong>移动端</strong><ul>
+<li><strong>Android、IOS 选择 UniWebView</strong></li>
+<li><strong>推荐原因：①软件更新支持好。②官方文档质量好。</strong></li>
+<li><em>不足：在调试时web页单独一个窗口显示，整体性不太好。</em></li>
+</ul>
+</li>
+</ul>
+<h1 id="UnityWebCore"><a href="#UnityWebCore" class="headerlink" title="UnityWebCore"></a>UnityWebCore</h1><h1 id="Unity-Webview"><a href="#Unity-Webview" class="headerlink" title="Unity-Webview"></a>Unity-Webview</h1><h1 id="UniWebView"><a href="#UniWebView" class="headerlink" title="UniWebView"></a>UniWebView</h1><h1 id="ZFBrowser"><a href="#ZFBrowser" class="headerlink" title="ZFBrowser"></a>ZFBrowser</h1><h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><ul>
+<li><strong>Android net：：ERR_CLEARTEXT_NOT_PERMITTED</strong><ul>
+<li><strong>从Android 9.0（API级别28）开始，默认情况下禁用明文支持。因此http的url均无法在webview中加载</strong></li>
+<li>在unity中Plugins/Android/AndroidManifest添加节点 **”android:usesCleartextTraffic=”true”**，启动域名明文，支持http请求。<pre class="line-numbers language-manifest" data-language="manifest"><code class="language-manifest">&lt;manifest xmlns:android&#x3D;&quot;http:&#x2F;&#x2F;schemas.android.com&#x2F;apk&#x2F;res&#x2F;android&quot;
+package&#x3D;&quot;com.example.webviewtest&quot;&gt;
+&lt;uses-permission android:name&#x3D;&quot;android.permission.INTERNET&quot;&#x2F;&gt;
+    &lt;application
+        android:usesCleartextTraffic&#x3D;&quot;true&quot;					&#x2F;&#x2F;确认网络权限给过以后，加入这句即可
+        &lt;activity android:name&#x3D;&quot;.MainActivity&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+```</li>
+</ul>
+</li>
+</ul>
 
+  <p><a class="classtest-link" href="/tags/UnityWeb/" rel="tag">UnityWeb</a> — 2021年3月25日</p>
+  
 
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">2021年6月27日</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2021/06/27/unity-re-geng-ji-ab-bao-qie-fen-fen-xiang-bi-ji/" >
-      
-        Unity热更及AB包切分分享笔记
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">2021年4月10日</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2021/04/10/arlivesolutionbaseonvmix/" >
-      
-        ARLiveSolutionBaseOnVMix
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">2021年4月9日</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2021/04/09/unity-da-bao-de-apk-zai-jie-bao-da-bao-qian-ming/" >
-      
-        Unity打包的Apk再解包打包签名
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">2021年3月25日</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2021/03/25/unitywebbrowsersolution/" >
-      
-        UnityWebBrowserSolution
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">2021年3月17日</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2021/03/17/ilruntimenote/" >
-      
-        ILRuntimeNote
-      
-    </a>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="three columns left lit">
-    <p class="bottom">2021年3月17日</p>
-  </div>
-  <div class="nine columns left mb-3">
-    <a href="/2021/03/17/hexoqa/" >
-      
-        HexoQA
-      
-    </a>
-  </div>
-</div>
-
-
-<h4> <a href="/archives">All Posts</a></h4>
 
           <div class="row mt-2">
   

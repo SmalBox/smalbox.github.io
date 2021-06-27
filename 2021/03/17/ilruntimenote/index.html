@@ -203,29 +203,39 @@ appDomain<span class="token punctuation">.</span><span class="token function">In
 </ul>
 <p>   <em>以上两步参考上面 <strong>基本流程</strong> 中代码示例。</em></p>
 <ul>
-<li><strong>InitILRuntime() 注册转换各种要用到的东西</strong></li>
-<li><strong>MainPojCallHotFix() 主工程调用热更dll</strong><ul>
-<li><strong>调用静态方法:</strong><ul>
+<li><p><strong>InitILRuntime() 注册转换各种要用到的东西</strong></p>
+</li>
+<li><p><strong>MainPojCallHotFix() 主工程调用热更dll</strong></p>
+<ul>
+<li><p><strong>调用静态方法:</strong></p>
+<ul>
 <li><strong>调用静态无参数方法</strong></li>
 <li><strong>调用静态一个参数方法</strong></li>
 <li><strong>调用静态两个参数方法</strong></li>
 </ul>
 </li>
-<li><strong>获取类:</strong></li>
-<li><strong>获取方法:</strong><ul>
+<li><p><strong>获取类:</strong></p>
+</li>
+<li><p><strong>获取方法:</strong></p>
+<ul>
 <li><strong>获取方法1 - 获取无重载方法</strong></li>
 <li><strong>获取方法2 - 获取有形参重载的方法，创建形参重载的参数列表来获取方法，以区别是那个具体方法</strong></li>
 </ul>
 </li>
-<li><strong>实例化类:</strong><ul>
+<li><p><strong>实例化类:</strong></p>
+<ul>
 <li><strong>实例化类型1 - 无缓存类，直接传递类名实例化</strong></li>
 <li><strong>实例化类型2 - 有缓存类，通过缓存类型实例化</strong></li>
 </ul>
 </li>
-<li><strong>调用实例的成员方法:</strong></li>
-<li><strong>调用泛型方法：</strong></li>
-<li><strong>获取泛型方法：</strong></li>
-<li><strong>注册委托(主工程里声明委托，热更工程里将实例赋值给主工程委托，让主工程完成调用)</strong><ul>
+<li><p><strong>调用实例的成员方法:</strong></p>
+</li>
+<li><p><strong>调用泛型方法：</strong></p>
+</li>
+<li><p><strong>获取泛型方法：</strong></p>
+</li>
+<li><p><strong>注册委托(主工程里声明委托，热更工程里将实例赋值给主工程委托，让主工程完成调用)</strong></p>
+<ul>
 <li>如果主工程里没有注册相应的委托，并在主工程里调用了热更dll的委托，运行时会提示注册，并且给与相应注册的代码如下，加入到主工程里的注册阶段即可。 <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp">KeyNotFoundException<span class="token punctuation">:</span> Cannot find convertor <span class="token keyword">for</span> <span class="token keyword">global</span><span class="token punctuation">::</span>TestDelegateMethod
 Please <span class="token keyword">add</span> <span class="token class-name">following</span> code<span class="token punctuation">:</span>
 appdomain<span class="token punctuation">.</span>DelegateManager<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">RegisterDelegateConvertor</span><span class="token generic class-name"><span class="token punctuation">&lt;</span><span class="token keyword">global</span><span class="token punctuation">:</span><span class="token punctuation">:</span>TestDelegateMethod<span class="token punctuation">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">(</span>act<span class="token punctuation">)</span> <span class="token operator">=></span>
@@ -237,7 +247,8 @@ appdomain<span class="token punctuation">.</span>DelegateManager<span class="tok
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 </li>
-<li><strong>跨域继承(热更工程中继承主工程里的类，主工程可以调用实现的功能)</strong><ul>
+<li><p><strong>跨域继承(热更工程中继承主工程里的类，主工程可以调用实现的功能)</strong></p>
+<ul>
 <li>必须在主工程中注册适配器才能用</li>
 <li><strong>假设主工程中被继承的方法为InfoBase,定义如下</strong> <pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">using UnityEngine;
 namespace SmalBox.Auto
@@ -261,7 +272,8 @@ public override Type BaseCLRType &#123;get&#123;return typeof(InfoBase);&#125;&#
 <li><strong>AdaptorType</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">&#x2F;&#x2F; 返回本类中 Adaptor的类型
 public override Type AdaptorType &#123;get&#123;return typeof(Adaptor);&#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li><strong>BaseCLRTypes</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">&#x2F;&#x2F; 只实现一个接口 返回null即可，实现多个参看官网文档
-public override Type[] BaseCLRTypes &#123;get&#123;return null;&#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+public override Type[] BaseCLRTypes &#123;get&#123;return null;&#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<em>跨域继承只能有1个Adapter，因此应该尽量避免一个类同时实现多个外部接口，对于coroutine来说是IEnumerator<object>,IEnumerator和IDisposable，ILRuntime虽然支持，但是一定要小心这种用法，使用不当很容易造成不可预期的问题日常开发如果需要实现多个DLL外部接口，请在Unity这边先做一个基类实现那些个接口，然后继承那个基类。</object></em></li>
 <li><strong>CreateCLRInstance</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">&#x2F;&#x2F; 返回用 appdomain和instance 作为参数，调用下面的Adaptor的构造方法，
 public override object CreateCLRInstance(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance) &#123;return new Adaptor(appdomain, instance);&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li><strong>Adaptor</strong><pre class="line-numbers language-c#" data-language="c#"><code class="language-c#">public class Adapter : SmalBox.Auto.InfoBase, CrossBindingAdaptorType
@@ -339,10 +351,52 @@ public class AutoCrossAdapter
         &#x2F;&#x2F; 自动生成出问题了再按照上面手写的来看看哪里有问题需要修复。
         AssetDatabase.Refresh();
     &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="热更Code"><a href="#热更Code" class="headerlink" title="热更Code"></a>热更Code</h2></li>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 </li>
+<li><p><strong>CLR重定向</strong></p>
+</li>
+<li><p><strong>CLR绑定</strong></p>
+<ul>
+<li>CLR绑定借助了ILRuntime的CLR重定向机制来实现，因为实质上也是将对CLR方法的反射调用重定向到我们自己定义的方法里面来。</li>
+<li>ILRuntime提供了一个代码生成工具来自动生成CLR绑定代码。</li>
+<li><strong>编辑器扩展绑定</strong> <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">MenuItem</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">"ILRuntime/Generate CLR Binding Code by Analysis"</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">GenerateCLRBindingByAnalysis</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">//用新的分析热更dll调用引用来生成绑定代码</span>
+    <span class="token class-name">ILRuntime<span class="token punctuation">.</span>Runtime<span class="token punctuation">.</span>Enviorment<span class="token punctuation">.</span>AppDomain</span> domain <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ILRuntime<span class="token punctuation">.</span>Runtime<span class="token punctuation">.</span>Enviorment<span class="token punctuation">.</span>AppDomain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>FileStream</span> fs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>FileStream</span><span class="token punctuation">(</span><span class="token string">"Assets/StreamingAssets/HotFix_Project.dll"</span><span class="token punctuation">,</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>FileMode<span class="token punctuation">.</span>Open<span class="token punctuation">,</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>FileAccess<span class="token punctuation">.</span>Read<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        domain<span class="token punctuation">.</span><span class="token function">LoadAssembly</span><span class="token punctuation">(</span>fs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//Crossbind Adapter is needed to generate the correct binding code</span>
+        <span class="token function">InitILRuntime</span><span class="token punctuation">(</span>domain<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ILRuntime<span class="token punctuation">.</span>Runtime<span class="token punctuation">.</span>CLRBinding<span class="token punctuation">.</span>BindingCodeGenerator<span class="token punctuation">.</span><span class="token function">GenerateBindingCode</span><span class="token punctuation">(</span>domain<span class="token punctuation">,</span> <span class="token string">"Assets/ILRuntime/Generated"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    AssetDatabase<span class="token punctuation">.</span><span class="token function">Refresh</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">InitILRuntime</span><span class="token punctuation">(</span><span class="token class-name">ILRuntime<span class="token punctuation">.</span>Runtime<span class="token punctuation">.</span>Enviorment<span class="token punctuation">.</span>AppDomain</span> domain<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">//这里需要注册所有热更DLL中用到的跨域继承Adapter，否则无法正确抓取引用</span>
+    domain<span class="token punctuation">.</span><span class="token function">RegisterCrossBindingAdaptor</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">MonoBehaviourAdapter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    domain<span class="token punctuation">.</span><span class="token function">RegisterCrossBindingAdaptor</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">CoroutineAdapter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    domain<span class="token punctuation">.</span><span class="token function">RegisterCrossBindingAdaptor</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">TestClassBaseAdapter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    domain<span class="token punctuation">.</span><span class="token function">RegisterValueTypeBinder</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token type-expression class-name">Vector3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Vector3Binder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><strong>主工程在ILRuntime全部初始化之后调用绑定</strong> <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp">ILRuntime<span class="token punctuation">.</span>Runtime<span class="token punctuation">.</span>Generated<span class="token punctuation">.</span>CLRBindings<span class="token punctuation">.</span><span class="token function">Initialize</span><span class="token punctuation">(</span>appdomain<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p><strong>主工程中调用热更工程中的协程</strong></p>
+<ul>
+<li>使用Couroutine时，C#编译器会自动生成一个实现了IEnumerator，IEnumerator<object>，IDisposable接口的类，因为这是跨域继承，所以需要写CrossBindAdapter</object></li>
+</ul>
+</li>
+<li><p><strong>主工程中反射获取dll中的类型</strong></p>
+ <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token class-name"><span class="token keyword">var</span></span> it <span class="token operator">=</span> appdomain<span class="token punctuation">.</span>LoadedTypes<span class="token punctuation">[</span><span class="token string">"HotFix_Project.InstanceClass"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token class-name"><span class="token keyword">var</span></span> type <span class="token operator">=</span> it<span class="token punctuation">.</span>ReflectionType<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="热更Code"><a href="#热更Code" class="headerlink" title="热更Code"></a>热更Code</h2></li>
 </ul>
 </li>
 </ul>
